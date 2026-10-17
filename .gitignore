@@ -1,0 +1,12 @@
+# Xcode
+DerivedData/
+*.xcodeproj/project.xcworkspace/
+xcuserdata/
+*.xcuserstate
+.DS_Store
+build/
+# 生成物
+*.xcodeproj
+!project.yml
+# 测试书源(不入库)
+TestBooks/
