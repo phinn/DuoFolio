@@ -10,3 +10,4 @@ build/
 !project.yml
 # 测试书源(不入库)
 TestBooks/
+release/
