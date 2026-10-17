@@ -40,9 +40,28 @@ final class LibraryModel {
 
     // MARK: - 持久化
 
+    /// 兼容 ISO8601 字符串与 double 两种日期格式(外部工具造索引时用 ISO 更可读)
+    static let decoder: JSONDecoder = {
+        let d = JSONDecoder()
+        d.dateDecodingStrategy = .custom { dec in
+            let c = try dec.singleValueContainer()
+            if let s = try? c.decode(String.self) {
+                let f = ISO8601DateFormatter()
+                if let date = f.date(from: s) { return date }
+                f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+                if let date = f.date(from: s) { return date }
+            }
+            if let t = try? c.decode(Double.self) {
+                return Date(timeIntervalSinceReferenceDate: t)
+            }
+            throw DecodingError.dataCorruptedError(in: c, debugDescription: "bad date")
+        }
+        return d
+    }()
+
     private func load() {
         if let data = try? Data(contentsOf: Self.fileURL),
-           var list = try? JSONDecoder().decode([Book].self, from: data) {
+           var list = try? Self.decoder.decode([Book].self, from: data) {
             let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             list = list.filter { b in
                 FileManager.default.fileExists(atPath: docs.appendingPathComponent(b.fileName).path)
