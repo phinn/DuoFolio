@@ -65,6 +65,16 @@ enum FolioAssets {
       transform: translateX(-50%); pointer-events:none; z-index:5;
       box-shadow: 0 0 18px rgba(0,0,0,.16);
     }
+    /* 对开左右页码(书页角标,左偶右奇,同 Apple Books) */
+    body[data-spread="2"] .folioPg {
+      position:fixed; bottom:calc(env(safe-area-inset-bottom) + 12px);
+      font:500 10px -apple-system; letter-spacing:.18em; color:var(--dim);
+      opacity:.72; pointer-events:none; font-variant-numeric: tabular-nums; z-index:6;
+    }
+    body[data-spread="2"] #folioPgL { left:calc(env(safe-area-inset-left) + 26px); }
+    body[data-spread="2"] #folioPgR { right:calc(env(safe-area-inset-right) + 26px); }
+    /* 单列时隐藏角标,只留中央页码 */
+    body:not([data-spread="2"]) .folioPg { display:none; }
     </style>
     """
 
@@ -126,7 +136,13 @@ enum FolioAssets {
           }
 
           function goto(i, instant) {
-            cur = Math.min(Math.max(0, i), totalCols - 1);
+            // 对开对齐:双列时把起点吸附到偶数列(左页=偶,右页=奇),边界内有效
+            let target = Math.min(Math.max(0, i), totalCols - 1);
+            if (cols === 2) {
+              target = Math.floor(target / 2) * 2;
+              if (target > totalCols - 1) target = Math.max(0, totalCols - 2);
+            }
+            cur = target;
             const x = cur * (colW + gap);
             flow.style.transition = instant ? 'none' : 'transform .3s cubic-bezier(.32,.72,.35,1)';
             flow.style.transform = 'translateX(' + (-x) + 'px)';
@@ -140,9 +156,24 @@ enum FolioAssets {
           }
 
           function pageNum() {
+            // 中央页码:单列=当前页;对开=左右页范围(起点列即左页)
             let el = document.getElementById('folioPageNum');
             if (!el) { el = document.createElement('div'); el.id = 'folioPageNum'; document.body.appendChild(el); }
-            el.textContent = (cur + 1) + ' / ' + totalCols;
+            let pl = document.getElementById('folioPgL'),
+                pr = document.getElementById('folioPgR');
+            if (!pl) {
+              pl = document.createElement('div'); pl.id = 'folioPgL'; pl.className = 'folioPg';
+              pr = document.createElement('div'); pr.id = 'folioPgR'; pr.className = 'folioPg';
+              document.body.appendChild(pl); document.body.appendChild(pr);
+            }
+            if (cols === 2) {
+              el.textContent = '';
+              pl.textContent = String(cur + 1);
+              pr.textContent = String(Math.min(cur + 2, totalCols));
+            } else {
+              el.textContent = (cur + 1) + ' / ' + totalCols;
+              pl.textContent = ''; pr.textContent = '';
+            }
           }
 
           function next() { goto(cur + cols, false); }

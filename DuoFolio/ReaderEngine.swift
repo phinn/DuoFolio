@@ -27,6 +27,10 @@ final class ReaderEngine {
     private(set) var pageCount = 0
     private(set) var chapterTitle = ""
     private(set) var isReady = false
+    /// 当前是否双列对开(JS layout 回报)
+    private(set) var isSpread = false
+    /// 全书总列数(对开时 = 总"面"数)
+    private(set) var totalCols = 0
     var showChrome = true
     weak var bridge: FolioBridge?
 
@@ -41,6 +45,12 @@ final class ReaderEngine {
     func markReady(spineCount: Int) {
         self.spineCount = spineCount
         isReady = true
+    }
+
+    /// JS resize 回报管线状态(bridge 调用)
+    func reportLayout(cols: Int, totalCols: Int) {
+        isSpread = cols >= 2
+        self.totalCols = totalCols
     }
 
     func update(spine: Int, page: Int, pageCount: Int, chapterTitle: String) {

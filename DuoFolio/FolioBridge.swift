@@ -129,6 +129,7 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             NSLog("[DuoFolio] JS error: \(d["msg"] ?? "?")")
         case "resize":
             NSLog("[DuoFolio] JS resize w=\(d["w"] ?? "?") h=\(d["h"] ?? "?") cols=\(d["cols"] ?? "?") total=\(d["total"] ?? "?")")
+            engine.reportLayout(cols: d["cols"] as? Int ?? 1, totalCols: d["total"] as? Int ?? 0)
         default: break
         }
     }

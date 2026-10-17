@@ -81,6 +81,14 @@ struct ReaderChrome<Content: View>: View {
                 Spacer()
             }
 
+            // 对开页码组:左页·右页(双列时显示,书页语义同印刷书)
+            if engine.isSpread, engine.pageCount > 0 {
+                Text("\(engine.position.pageIndex + 1)·\(min(engine.position.pageIndex + 2, engine.pageCount))")
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(.secondary)
+                    .help("两页对开")
+            }
+
             Button { engine.nextPage() } label: {
                 Image(systemName: "chevron.right")
                     .font(.system(size: 16, weight: .semibold))
