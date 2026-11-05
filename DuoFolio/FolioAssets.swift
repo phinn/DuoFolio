@@ -21,7 +21,8 @@ enum FolioAssets {
     html, body { margin:0 !important; padding:0 !important; width:auto !important; }
     body {
       font-family: 'Iowan Old Style', 'Palatino', 'Georgia', serif;
-      background: var(--bg); color: var(--fg);
+      /* !important: 书籍自带 CSS 内联在后会硬编码 body 背景压掉主题变量(红字同根因) */
+      background: var(--bg) !important; color: var(--fg) !important;
       -webkit-font-smoothing: antialiased;
       transition: background .4s ease, color .4s ease;
     }
@@ -71,6 +72,9 @@ enum FolioAssets {
     hr { border:0; text-align:center; margin:1.3em 0; break-inside:avoid; }
     hr::after { content:'❦'; color:var(--dim); font-size:.9em; letter-spacing:.5em; }
     a { color:inherit; text-decoration:none; }
+    /* 阅读色强制继承:书籍自带 CSS(Gutenberg 章节类/装饰符)常带花色,
+       会把整章染成红/蓝,压过 body 继承色;用 !important 钉回主题色 */
+    #flow, #flow * { color: inherit !important; }
     ::selection { background: rgba(176,125,79,.30); }
     #folioPageNum {
       position:fixed; bottom:calc(env(safe-area-inset-bottom) + 12px); left:0; right:0;
