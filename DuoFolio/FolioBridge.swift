@@ -55,8 +55,12 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         var body = ""
         for ch in epub.chapters {
             let html = epub.inlineResources(html: epub.readString(ch.href) ?? "", baseURL: epub.opfDir.isEmpty ? "" : epub.opfDir + "/")
+            // 封面页(整页内联 SVG/Image)跳过:书架卡片已展示封面,且 WebKit 多列下
+            // 百分比尺寸的整页替换元素会撑爆列几何(实测 section 被撑到 2753px)
+            let low = html.lowercased()
+            if low.contains("<svg") && low.contains("<image") { continue }
             let title = ch.title.isEmpty ? "Chapter \(ch.id + 1)" : ch.title
-            body += "<section class=\"chapter\"><h1 id=\"ch\(ch.id)\">\(Self.escape(title))</h1>\(html)</section>"
+            body += "<section class=\"chapter\" data-title=\"\(Self.escape(title))\"><h1 id=\"ch\(ch.id)\" class=\"folio-chtitle\">\(Self.escape(title))</h1>\(html)</section>"
         }
         if body.isEmpty {
             return fallbackDocument("这本书没有可读内容")
@@ -68,7 +72,7 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
         \(FolioAssets.readerCSS)
         </head><body>
-        <div id="flow">\(body)</div>
+        <div id="flow"><div class="spread-void"></div>\(body)</div>
         \(FolioAssets.readerJS(themeJSON: Self.themeJSON(s.theme), startSpine: initial.spineIndex, startPage: initial.pageIndex, serif: s.serif, size: s.fontSize))
         </body></html>
         """
@@ -115,16 +119,21 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
         switch t {
         case "layout":
             // 首次排版完成:章节→列映射 + 总页数
+            NSLog("[DuoFolio] JS layout total=\(d["total"] ?? "?") chapters=\((d["chapterCols"] as? [Int])?.count ?? -1) webview=\(webView.frame)")
             if let cols = d["chapterCols"] as? [Int] { chapterColumns = cols }
             let total = d["total"] as? Int ?? 1
             engine.markReady(spineCount: chapterColumns.count)
-            engine.update(spine: 0, page: 0, pageCount: total, chapterTitle: "")
+            engine.update(spine: 0, col: 0, cols: total, title: "", page: 1, pages: total, leftPg: 0, rightPg: 0)
         case "pos":
             let spine = d["spine"] as? Int ?? 0
             let col = d["col"] as? Int ?? 0
             let total = d["cols"] as? Int ?? 1
             let title = d["title"] as? String ?? ""
-            engine.update(spine: spine, page: col, pageCount: total, chapterTitle: title)
+            let page = d["page"] as? Int ?? (col + 1)
+            let pages = d["pages"] as? Int ?? total
+            let leftPg = d["left"] as? Int ?? 0
+            let rightPg = d["right"] as? Int ?? 0
+            engine.update(spine: spine, col: col, cols: total, title: title, page: page, pages: pages, leftPg: leftPg, rightPg: rightPg)
         case "jserr":
             NSLog("[DuoFolio] JS error: \(d["msg"] ?? "?")")
         case "resize":

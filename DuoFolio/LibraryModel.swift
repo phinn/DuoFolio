@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import PDFKit
 
 /// 全局书架状态:书单 JSON 持久化 + 文件导入 + 元数据解析
 @Observable
@@ -91,7 +92,14 @@ final class LibraryModel {
         Task.detached(priority: .userInitiated) { [weak self] in
             guard let self else { return }
             do {
-                _ = try EpubBook.parse(data: Data(contentsOf: url))
+                let data = try Data(contentsOf: url)
+                if book.isPDF {
+                    guard PDFDocument(data: data) != nil else {
+                        throw CocoaError(.fileReadCorruptFile)
+                    }
+                } else {
+                    _ = try EpubBook.parse(data: data)
+                }
                 await MainActor.run {
                     self.pendingOpen = book
                     self.isImporting = false
@@ -121,15 +129,31 @@ final class LibraryModel {
 
         do {
             let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            let fileName = "\(UUID().uuidString).epub"
+            let ext = url.pathExtension.lowercased()
+            let isPDF = ext == "pdf"
+            let fileName = "\(UUID().uuidString).\(isPDF ? "pdf" : "epub")"
             let dest = docs.appendingPathComponent(fileName)
             try FileManager.default.copyItem(at: url, to: dest)
 
-            let epub = try EpubBook.parse(data: try Data(contentsOf: dest))
-            let book = Book(id: UUID(), title: epub.title, author: epub.author,
-                            fileName: fileName, coverData: epub.coverImageData,
+            let data = try Data(contentsOf: dest)
+            let title: String, author: String, cover: Data?, spine: Int
+            if isPDF {
+                guard let pdf = PDFDocument(data: data) else { throw CocoaError(.fileReadCorruptFile) }
+                title = pdf.documentAttributes?[PDFDocumentAttribute.titleAttribute] as? String
+                    ?? url.deletingPathExtension().lastPathComponent
+                author = pdf.documentAttributes?[PDFDocumentAttribute.authorAttribute] as? String ?? ""
+                cover = pdf.page(at: 0)?.thumbnail(of: CGSize(width: 320, height: 460),
+                                                   for: .mediaBox).pngData()
+                spine = pdf.pageCount
+            } else {
+                let epub = try EpubBook.parse(data: data)
+                title = epub.title; author = epub.author
+                cover = epub.coverImageData; spine = epub.chapters.count
+            }
+            let book = Book(id: UUID(), title: title, author: author,
+                            fileName: fileName, coverData: cover,
                             addedAt: Date(), lastReadAt: nil, position: nil,
-                            spineCount: epub.chapters.count)
+                            spineCount: spine, format: isPDF ? "pdf" : "epub")
             books.insert(book, at: 0)
             save()
         } catch {

@@ -4,6 +4,9 @@ import Foundation
 /// CSS 多列排版(Apple Books 同款分页机制):
 ///   #flow 设 column-width,整本书成横向长卷;翻页 = translateX 步进一个 column-width。
 ///   竖屏单列,横宽(w > h)自动双列对开,iPhone Duo 展开即成双页书。
+/// 双列对开时正文从右页(奇数列)起:#flow 开头注入一个空白占位列(列 0),
+///   正文第 1 页落在列 1(右页),实现「左偶右奇」的印刷书页序;每章再靠
+///   .spread-void 补齐,强制新章从右页起。
 enum FolioAssets {
 
     // MARK: - CSS
@@ -11,7 +14,11 @@ enum FolioAssets {
     static let readerCSS: String = """
     <style id="folio-css">
     * { margin:0; padding:0; box-sizing:border-box; -webkit-text-size-adjust:100%; }
+    :root { --sal: env(safe-area-inset-left); --sar: env(safe-area-inset-right); }
     html, body { height:100%; overflow:hidden; }
+    /* 书籍 CSS 常带 body{margin:10%}(Gutenberg @media screen),会把 #flow 挤到
+       单列宽导致对开失效;host 用 !important 钉死,后到的书籍声明也压不过 */
+    html, body { margin:0 !important; padding:0 !important; width:auto !important; }
     body {
       font-family: 'Iowan Old Style', 'Palatino', 'Georgia', serif;
       background: var(--bg); color: var(--fg);
@@ -23,14 +30,26 @@ enum FolioAssets {
       overflow: hidden;
     }
     #flow {
-      column-width: var(--colw);
+      column-count: var(--colcount, 1);
       column-gap: var(--gap);
       column-fill: auto;
       height: 100%;
-      padding: calc(env(safe-area-inset-top) + 44px) var(--pgap) calc(env(safe-area-inset-bottom) + 40px);
+      padding: calc(env(safe-area-inset-top) + 44px) var(--pgapr) calc(env(safe-area-inset-bottom) + 40px) var(--pgapl);
       will-change: transform;
     }
     .chapter { break-inside: auto; }
+    /* 双列对开时的空白占位列:高度撑满一列(由 JS 精确设 px),强制后续内容换列 */
+    .spread-void { width:100%; height:100%; break-after:column; }
+    body:not([data-spread="2"]) .spread-void { display:none; }
+    /* 书籍自带 CSS 在 body 内联、晚于本表生效,注入元素与替换元素须 !important 钉死 */
+    #flow svg, #flow img { max-width:100% !important; max-height:100% !important; }
+    #flow h1.folio-chtitle {
+      font-family: -apple-system, 'SF Pro Display', sans-serif;
+      font-size:.8em !important; font-weight:600 !important; letter-spacing:.16em !important;
+      text-transform:uppercase !important; color:var(--dim) !important;
+      margin:1.6em 0 2.4em !important; break-before: column;
+    }
+    #flow section:first-of-type h1.folio-chtitle { break-before: auto; margin-top:.4em; }
     h1 {
       font-family: -apple-system, 'SF Pro Display', sans-serif;
       font-size:.8em; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
@@ -97,9 +116,53 @@ enum FolioAssets {
           document.body.style.fontFamily = root.style.getPropertyValue('--serif');
           root.dataset.size = '\(size)';
 
-          let cols = 1, colW = 0, gap = 0, totalCols = 1, cur = 0;
+          let cols = 1, colW = 0, gap = 0, totalCols = 1, cur = 0, period = 1, padL = 0, padR = 0;
           let chapterStarts = [];   // 每章起始列号
           const px = n => n + 'px';
+
+          // 空白占位列高度 = 一列内容高(flow 高度减上下 padding);void 需精确占满一列,
+          // break-after:column 才能把后续内容推到下一列
+          function syncVoidHeights() {
+            const cs = getComputedStyle(flow);
+            const padTop = parseFloat(cs.paddingTop) || 0;
+            const padBottom = parseFloat(cs.paddingBottom) || 0;
+            const h = flow.clientHeight - padTop - padBottom;
+            document.querySelectorAll('.spread-void').forEach(e => { e.style.height = px(h); });
+          }
+
+          function measureChapterStarts() {
+            const starts = [];
+            document.querySelectorAll('.chapter').forEach(el => {
+              starts.push(Math.round((el.offsetLeft - padL) / period));
+            });
+            return starts;
+          }
+
+          // 双列对开:每章强制从右页(奇数列)起。multicol 的 break-before:column 只能换列、
+          // 不保证奇偶,故运行时补齐:凡起始列是偶数(左页)的章节,前插一个 void 推到右页。
+          // 每轮只插一个并重测,避免连锁误判;守卫上限防死循环。
+          function alignChapters() {
+            if (cols !== 2) return;
+            document.querySelectorAll('.chapter-void').forEach(e => e.remove());
+            let guard = 0;
+            while (guard++ < 60) {
+              syncVoidHeights();
+              const sections = document.querySelectorAll('.chapter');
+              const starts = measureChapterStarts();
+              let inserted = false;
+              for (let i = 0; i < starts.length; i++) {
+                if (starts[i] % 2 === 0) {
+                  const d = document.createElement('div');
+                  d.className = 'spread-void chapter-void';
+                  sections[i].before(d);
+                  inserted = true;
+                  break;
+                }
+              }
+              if (!inserted) break;
+            }
+            syncVoidHeights();
+          }
 
           function layout() {
             const w = root.clientWidth, h = root.clientHeight;
@@ -108,20 +171,47 @@ enum FolioAssets {
             cols = wantSpread;
             document.body.dataset.spread = cols;
             gap = cols === 2 ? Math.round(w * 0.055) : 0;
-            const pgap = cols === 2 ? 34 : 26;
-            root.style.setProperty('--pgap', px(pgap));
-            // 实际列宽 = 内容区宽减去列间距,否则 translateX 步长与浏览器真实列周期不符 → 右列偏出屏幕
-            colW = cols === 2 ? Math.round((w - 2 * pgap - gap) / 2) : w - 2 * pgap;
-            root.style.setProperty('--colw', px(colW));
+            // 横屏刘海/圆角的左右 safe-area 计入左右 padding,保证列宽精确
+            const sal = parseFloat(getComputedStyle(root).getPropertyValue('--sal')) || 0;
+            const sar = parseFloat(getComputedStyle(root).getPropertyValue('--sar')) || 0;
+            let pgapl = (cols === 2 ? 34 : 26) + sal, pgapr = (cols === 2 ? 34 : 26) + sar;
+            // 全整数化:内容宽凑偶数(左 padding 吸收 1px),列宽/步长与浏览器逐像素一致,杜绝串列渗漏
+            const contentW = w - pgapl - pgapr;
+            if (cols === 2 && (contentW - gap) % 2 !== 0) { pgapl += 1; }
+            const cw = w - pgapl - pgapr;
+            root.style.setProperty('--pgapl', px(pgapl));
+            root.style.setProperty('--pgapr', px(pgapr));
+            padL = pgapl; padR = pgapr;
+            // 显式列数:WebKit 对 column-width 的取整判定会差 1px 退化成单列
+            root.style.setProperty('--colcount', String(cols));
             root.style.setProperty('--gap', px(gap));
+            // 列周期初值;随后从 DOM 实测
+            colW = (cw - gap) / cols;
+            period = colW + gap;
             const fs = parseFloat(root.dataset.size || '19');
             root.style.fontSize = px(Math.round(fs * (colW > 620 ? 1.12 : 1)));
-            totalCols = Math.max(1, Math.round(flow.scrollWidth / (colW + gap)));
-            // 章节起始列号
-            chapterStarts = [];
-            document.querySelectorAll('.chapter').forEach(el => {
-              chapterStarts.push(Math.round(el.offsetLeft / (colW + gap)));
-            });
+            syncVoidHeights();
+            measurePeriod();
+            alignChapters();
+            totalCols = Math.max(1, Math.round((flow.scrollWidth - padL - padR) / period));
+            chapterStarts = measureChapterStarts();
+          }
+
+          // 实测列几何:全书段落宽度中位数 = 真实列宽(表格/题头里的窄段落不占主流)
+          function measurePeriod() {
+            try {
+              const ws = [];
+              document.querySelectorAll('#flow p').forEach(p => {
+                ws.push(p.getBoundingClientRect().width);
+              });
+              if (ws.length < 10) return;
+              ws.sort((a, b) => a - b);
+              const med = ws[Math.floor(ws.length / 2)];
+              if (med > 80 && med < root.clientWidth) {
+                colW = med;
+                period = med + gap;
+              }
+            } catch (e) { /* 保初值 */ }
           }
 
           function chapterAt(col) {
@@ -143,7 +233,7 @@ enum FolioAssets {
               if (target > totalCols - 1) target = Math.max(0, totalCols - 2);
             }
             cur = target;
-            const x = cur * (colW + gap);
+            const x = cur * period;
             flow.style.transition = instant ? 'none' : 'transform .3s cubic-bezier(.32,.72,.35,1)';
             flow.style.transform = 'translateX(' + (-x) + 'px)';
             report();
@@ -151,12 +241,27 @@ enum FolioAssets {
 
           function report() {
             const [sp, title] = chapterAt(cur);
-            send({ t:'pos', spine: sp, col: cur, cols: totalCols, title });
+            // 双列时列 0 是空白占位,正文第 k 页在第 k 列;据此折算正文页码回报原生层
+            let page, pages, leftPg, rightPg;
+            if (cols === 2) {
+              pages = Math.max(0, totalCols - 1);
+              const rightCol = cur + 1;
+              const hasRight = rightCol < totalCols;
+              leftPg = cur > 0 ? cur : 0;
+              rightPg = hasRight ? rightCol : 0;
+              page = hasRight ? rightCol : cur;
+              page = Math.max(1, page);
+            } else {
+              pages = totalCols;
+              page = cur + 1;
+              leftPg = 0; rightPg = 0;
+            }
+            send({ t:'pos', spine: sp, col: cur, cols: totalCols, page: page, pages: pages, left: leftPg, right: rightPg, title: title });
             pageNum();
           }
 
           function pageNum() {
-            // 中央页码:单列=当前页;对开=左右页范围(起点列即左页)
+            // 中央页码:单列=当前页;对开=左右页角标(左偶右奇,空白页不显示)
             let el = document.getElementById('folioPageNum');
             if (!el) { el = document.createElement('div'); el.id = 'folioPageNum'; document.body.appendChild(el); }
             let pl = document.getElementById('folioPgL'),
@@ -168,8 +273,8 @@ enum FolioAssets {
             }
             if (cols === 2) {
               el.textContent = '';
-              pl.textContent = String(cur + 1);
-              pr.textContent = String(Math.min(cur + 2, totalCols));
+              pl.textContent = cur > 0 ? String(cur) : '';
+              pr.textContent = (cur + 1 < totalCols) ? String(cur + 1) : '';
             } else {
               el.textContent = (cur + 1) + ' / ' + totalCols;
               pl.textContent = ''; pr.textContent = '';
@@ -204,6 +309,10 @@ enum FolioAssets {
           }, {passive:true});
 
           window.addEventListener('resize', () => { layout(); goto(cur, true); send({t:'resize', w: root.clientWidth, h: root.clientHeight, cols: cols, total: totalCols}); });
+          // 图片/内联 SVG 等资源晚于首排版就绪会改变列盒:load 后防抖重排
+          const relayoutSoon = (() => { let t; return () => { clearTimeout(t); t = setTimeout(() => { layout(); goto(cur, true); }, 120); }; })();
+          document.querySelectorAll('#flow img, #flow svg').forEach(el => el.addEventListener('load', relayoutSoon));
+          window.addEventListener('load', relayoutSoon);
           layout();
           // 初始位置:spine 对应章起始列 + 章内页偏移
           const startSpine = \(startSpine), startPage = \(startPage);

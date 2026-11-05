@@ -48,8 +48,8 @@ struct ReaderChrome<Content: View>: View {
                 }
             }
             Spacer()
-            if engine.isReady, engine.pageCount > 0 {
-                Text("\(engine.position.pageIndex + 1)/\(engine.pageCount)")
+            if engine.isReady, engine.pages > 0 {
+                Text("\(engine.page)/\(engine.pages)")
                     .font(.caption.monospacedDigit())
                     .foregroundStyle(.secondary)
             }
@@ -81,9 +81,11 @@ struct ReaderChrome<Content: View>: View {
                 Spacer()
             }
 
-            // 对开页码组:左页·右页(双列时显示,书页语义同印刷书)
-            if engine.isSpread, engine.pageCount > 0 {
-                Text("\(engine.position.pageIndex + 1)·\(min(engine.position.pageIndex + 2, engine.pageCount))")
+            // 对开页码组:左页·右页(双列时显示,书页语义同印刷书,空白页留空)
+            if engine.isSpread, engine.pages > 0 {
+                let l = engine.leftPg > 0 ? "\(engine.leftPg)" : ""
+                let r = engine.rightPg > 0 ? "\(engine.rightPg)" : ""
+                Text("\(l)·\(r)")
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(.secondary)
                     .help("两页对开")

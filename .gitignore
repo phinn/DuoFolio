@@ -5,6 +5,7 @@ xcuserdata/
 *.xcuserstate
 .DS_Store
 build/
+build-duo/
 # 生成物
 *.xcodeproj
 !project.yml

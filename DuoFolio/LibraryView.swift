@@ -8,29 +8,14 @@ struct LibraryView: View {
     @State private var openedBook: Book?
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                FolioTheme.paper.color.ignoresSafeArea()
+        ZStack {
+            FolioTheme.paper.color.ignoresSafeArea()
+            VStack(spacing: 0) {
+                header
                 content
             }
-            .navigationTitle("DuoFolio")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("书架")
-                        .font(.system(.title2, design: .serif).weight(.semibold))
-                        .foregroundStyle(Color(red: 0.17, green: 0.16, blue: 0.15))
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        library.presentImporter = true
-                    } label: {
-                        Image(systemName: "plus")
-                            .font(.system(size: 17, weight: .semibold))
-                    }
-                }
-            }
-            .overlay {
+        }
+        .overlay {
                 if library.isImporting {
                     VStack(spacing: 12) {
                         ProgressView()
@@ -119,13 +104,34 @@ struct LibraryView: View {
                 Text(library.importError ?? "")
             }
             .fileImporter(isPresented: $library.presentImporter,
-                          allowedContentTypes: [UTType(filenameExtension: "epub") ?? .data],
+                          allowedContentTypes: [UTType(filenameExtension: "epub") ?? .data, .pdf],
                           allowsMultipleSelection: false) { result in
                 if case .success(let urls) = result, let url = urls.first {
                     library.importBook(from: url)
                 }
             }
+    }
+
+    /// 自绘顶栏:标题 + 导入(不用系统导航栏,避免 iOS 26 自动「···」)
+    private var header: some View {
+        HStack(spacing: 14) {
+            Text("书架")
+                .font(.system(.title2, design: .serif).weight(.semibold))
+                .foregroundStyle(Color(red: 0.17, green: 0.16, blue: 0.15))
+            Spacer()
+            Button {
+                library.presentImporter = true
+            } label: {
+                Image(systemName: "plus")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(Color(red: 0.17, green: 0.16, blue: 0.15))
+                    .frame(width: 34, height: 34)
+                    .background(.regularMaterial, in: Circle())
+            }
         }
+        .padding(.horizontal, 22)
+        .padding(.top, 6)
+        .padding(.bottom, 12)
     }
 
     @ViewBuilder
@@ -196,7 +202,7 @@ struct LibraryView: View {
             VStack(spacing: 8) {
                 Text("把书放进来")
                     .font(.system(.title3, design: .serif).weight(.semibold))
-                Text("右上角导入 EPUB,全本地阅读\n展开 iPhone Duo 即成双页对开")
+                Text("右上角导入 EPUB / PDF,全本地阅读\n展开 iPhone Duo 即成双页对开")
                     .font(.system(size: 13, design: .serif))
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)

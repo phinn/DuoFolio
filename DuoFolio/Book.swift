@@ -12,8 +12,11 @@ struct Book: Identifiable, Hashable, Codable {
     var lastReadAt: Date?
     var position: FolioPosition?
     var spineCount: Int = 0
+    /// "epub" | "pdf";nil 兼容旧索引(视为 epub)
+    var format: String?
 
     var hasProgress: Bool { position != nil }
+    var isPDF: Bool { format == "pdf" }
 
     static func == (lhs: Book, rhs: Book) -> Bool { lhs.id == rhs.id }
     func hash(into hasher: inout Hasher) { hasher.combine(id) }

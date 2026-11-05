@@ -29,8 +29,16 @@ final class ReaderEngine {
     private(set) var isReady = false
     /// 当前是否双列对开(JS layout 回报)
     private(set) var isSpread = false
-    /// 全书总列数(对开时 = 总"面"数)
+    /// 全书总列数(对开时含空白占位列)
     private(set) var totalCols = 0
+    /// 当前正文页码(1-based,双列时已跳过空白占位列)
+    private(set) var page = 0
+    /// 正文总页数(不含空白占位列)
+    private(set) var pages = 0
+    /// 对开左页正文页码(0=空白页)
+    private(set) var leftPg = 0
+    /// 对开右页正文页码(0=空白页)
+    private(set) var rightPg = 0
     var showChrome = true
     weak var bridge: FolioBridge?
 
@@ -38,6 +46,17 @@ final class ReaderEngine {
         self.book = book
         self.settings = settings
         if let position { self.position = position }
+        #if DEBUG
+        // 素材产线 harness:SIMCTL_CHILD_DF_GOTO_PAGE=N 直落第 N 列,优先于存档位置
+        if let raw = ProcessInfo.processInfo.environment["DF_GOTO_PAGE"],
+           let p = Int(raw), p >= 0 {
+            self.position = FolioPosition(spineIndex: 0, pageIndex: p)
+        }
+        // SIMCTL_CHILD_DF_HIDE_CHROME=1 隐藏阅读浮层,出纯书页截图
+        if ProcessInfo.processInfo.environment["DF_HIDE_CHROME"] == "1" {
+            showChrome = false
+        }
+        #endif
     }
 
     // MARK: WebView → Native(由 FolioBridge 调)
@@ -53,12 +72,17 @@ final class ReaderEngine {
         self.totalCols = totalCols
     }
 
-    func update(spine: Int, page: Int, pageCount: Int, chapterTitle: String) {
-        position = FolioPosition(spineIndex: spine, pageIndex: page)
-        self.pageCount = pageCount
-        self.chapterTitle = chapterTitle
+    func update(spine: Int, col: Int, cols: Int, title: String,
+                page: Int, pages: Int, leftPg: Int, rightPg: Int) {
+        position = FolioPosition(spineIndex: spine, pageIndex: col)
+        self.pageCount = cols
+        self.chapterTitle = title
+        self.page = page
+        self.pages = pages
+        self.leftPg = leftPg
+        self.rightPg = rightPg
         #if DEBUG
-        NSLog("[DuoFolio] engine pos spine=\(spine) page=\(page)/\(pageCount)")
+        NSLog("[DuoFolio] engine pos spine=\(spine) col=\(col)/\(cols) page=\(page)/\(pages)")
         #endif
     }
 

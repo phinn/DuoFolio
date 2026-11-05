@@ -11,7 +11,9 @@ struct ReaderContainer: View {
 
     var body: some View {
         Group {
-            if let engine {
+            if book.isPDF {
+                PDFReaderView(book: book, library: library, onBack: onBack)
+            } else if let engine {
                 ReaderChrome(engine: engine, onBack: onBack) {
                     FolioWebView(engine: engine)
                         .ignoresSafeArea()
