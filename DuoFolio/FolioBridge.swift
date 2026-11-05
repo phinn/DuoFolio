@@ -118,12 +118,14 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
               let t = d["t"] as? String else { return }
         switch t {
         case "layout":
-            // 首次排版完成:章节→列映射 + 总页数
+            // 首次排版完成:章节→列映射 + 总页数 + 对开态。
+            // 不在此覆盖位置:'pos' 已先于 'layout' 到达(JS 里 goto→report 先发 pos),此处仅 markReady + 管线状态
             NSLog("[DuoFolio] JS layout total=\(d["total"] ?? "?") chapters=\((d["chapterCols"] as? [Int])?.count ?? -1) webview=\(webView.frame)")
             if let cols = d["chapterCols"] as? [Int] { chapterColumns = cols }
             let total = d["total"] as? Int ?? 1
+            let spread = d["spread"] as? Int ?? 1
             engine.markReady(spineCount: chapterColumns.count)
-            engine.update(spine: 0, col: 0, cols: total, title: "", page: 1, pages: total, leftPg: 0, rightPg: 0)
+            engine.reportLayout(cols: spread, totalCols: total)
         case "pos":
             let spine = d["spine"] as? Int ?? 0
             let col = d["col"] as? Int ?? 0

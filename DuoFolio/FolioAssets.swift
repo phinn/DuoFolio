@@ -138,6 +138,16 @@ enum FolioAssets {
             return starts;
           }
 
+          // 所有空白占位列号(升序):含 #flow 开头占位列 + 每章补齐的 chapter-void。
+          // 正文页码 = 列号 - 前方占位列数 + 1,这样空白页不编号、正文页号连续。
+          function voidCols() {
+            const v = [];
+            document.querySelectorAll('.spread-void').forEach(e => {
+              v.push(Math.round((e.offsetLeft - padL) / period));
+            });
+            return v.sort((a, b) => a - b);
+          }
+
           // 双列对开:每章强制从右页(奇数列)起。multicol 的 break-before:column 只能换列、
           // 不保证奇偶,故运行时补齐:凡起始列是偶数(左页)的章节,前插一个 void 推到右页。
           // 每轮只插一个并重测,避免连锁误判;守卫上限防死循环。
@@ -241,16 +251,19 @@ enum FolioAssets {
 
           function report() {
             const [sp, title] = chapterAt(cur);
-            // 双列时列 0 是空白占位,正文第 k 页在第 k 列;据此折算正文页码回报原生层
+            // 正文页码 = 跳过所有空白占位列后的 1-based 序号(开头 void 与章节补齐 void 均不编号)
             let page, pages, leftPg, rightPg;
             if (cols === 2) {
-              pages = Math.max(0, totalCols - 1);
+              const voids = voidCols();
+              pages = Math.max(0, totalCols - voids.length);
+              const bodyOf = col => col - voids.filter(v => v < col).length + 1;
               const rightCol = cur + 1;
               const hasRight = rightCol < totalCols;
-              leftPg = cur > 0 ? cur : 0;
-              rightPg = hasRight ? rightCol : 0;
-              page = hasRight ? rightCol : cur;
-              page = Math.max(1, page);
+              const curVoid = voids.includes(cur);
+              const rightVoid = voids.includes(rightCol);
+              leftPg = (cur > 0 && !curVoid) ? bodyOf(cur) : 0;
+              rightPg = (hasRight && !rightVoid) ? bodyOf(rightCol) : 0;
+              page = rightPg > 0 ? rightPg : (leftPg > 0 ? leftPg : 1);
             } else {
               pages = totalCols;
               page = cur + 1;
@@ -273,8 +286,11 @@ enum FolioAssets {
             }
             if (cols === 2) {
               el.textContent = '';
-              pl.textContent = cur > 0 ? String(cur) : '';
-              pr.textContent = (cur + 1 < totalCols) ? String(cur + 1) : '';
+              const voids = voidCols();
+              const bodyOf = col => col - voids.filter(v => v < col).length + 1;
+              const rightCol = cur + 1;
+              pl.textContent = (cur > 0 && !voids.includes(cur)) ? String(bodyOf(cur)) : '';
+              pr.textContent = (rightCol < totalCols && !voids.includes(rightCol)) ? String(bodyOf(rightCol)) : '';
             } else {
               el.textContent = (cur + 1) + ' / ' + totalCols;
               pl.textContent = ''; pr.textContent = '';
@@ -314,12 +330,11 @@ enum FolioAssets {
           document.querySelectorAll('#flow img, #flow svg').forEach(el => el.addEventListener('load', relayoutSoon));
           window.addEventListener('load', relayoutSoon);
           layout();
-          // 初始位置:spine 对应章起始列 + 章内页偏移
+          // 初始位置:pageIndex 即全书绝对列号(0-based,含空白占位列),直接落列,再由 goto 吸附偶数列
           const startSpine = \(startSpine), startPage = \(startPage);
-          const base = chapterStarts[Math.min(startSpine, chapterStarts.length - 1)] || 0;
-          cur = Math.min(base + startPage, totalCols - 1);
+          cur = Math.min(startPage, totalCols - 1);
           goto(cur, true);
-          send({ t:'layout', chapterCols: chapterStarts, total: totalCols });
+          send({ t:'layout', chapterCols: chapterStarts, total: totalCols, spread: cols });
 
           return { next, prev, goto, style, setSpread };
         })();
