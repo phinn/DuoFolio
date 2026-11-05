@@ -319,6 +319,13 @@ enum FolioAssets {
           }, {passive:true});
           document.addEventListener('touchend', e => {
             const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+            // tap(位移小、时长短、非交互元素)→ 上报原生层开关阅读浮层
+            // WKWebView 会吞 SwiftUI onTapGesture,chrome 开关统一走 JS 侧
+            if (Date.now() - st <= 600 && Math.abs(dx) < 24 && Math.abs(dy) < 24
+                && !(e.target.closest && e.target.closest('a,button,input,select,textarea'))) {
+              send({ t: 'tap' });
+              return;
+            }
             if (Date.now() - st > 600 || Math.abs(dx) < 24) return;
             if (Math.abs(dy) > Math.abs(dx) * 1.4) return;
             if (dx < 0) next(); else prev();

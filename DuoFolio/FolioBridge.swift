@@ -136,6 +136,9 @@ final class FolioBridge: NSObject, WKScriptMessageHandler, WKNavigationDelegate 
             let leftPg = d["left"] as? Int ?? 0
             let rightPg = d["right"] as? Int ?? 0
             engine.update(spine: spine, col: col, cols: total, title: title, page: page, pages: pages, leftPg: leftPg, rightPg: rightPg)
+        case "tap":
+            // 正文单击(WKWebView 吞 SwiftUI 手势,chrome 开关统一由 JS 侧上报)
+            engine.toggleChrome()
         case "jserr":
             NSLog("[DuoFolio] JS error: \(d["msg"] ?? "?")")
         case "resize":

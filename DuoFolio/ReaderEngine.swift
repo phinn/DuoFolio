@@ -42,6 +42,11 @@ final class ReaderEngine {
     var showChrome = true
     weak var bridge: FolioBridge?
 
+    /// 正文单击(经 FolioBridge "tap" 消息):切换阅读浮层
+    func toggleChrome() {
+        showChrome.toggle()
+    }
+
     init(book: Book, settings: ReaderSettings = .standard, position: FolioPosition? = nil) {
         self.book = book
         self.settings = settings

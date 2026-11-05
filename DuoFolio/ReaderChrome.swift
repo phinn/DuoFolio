@@ -12,12 +12,11 @@ struct ReaderChrome<Content: View>: View {
     var body: some View {
         ZStack {
             content()
-                .onTapGesture {
-                    withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
-                        engine.showChrome.toggle()
-                        if !engine.showChrome { showSettings = false }
-                    }
-                }
+            // 单击开关由 JS touchend 上报(FolioBridge "tap" → engine.toggleChrome):
+            // SwiftUI onTapGesture 会被 WKWebView 原生手势吞掉,实测无效,勿在此挂手势
+            .onChange(of: engine.showChrome) { _, showing in
+                if !showing { showSettings = false }
+            }
 
             VStack {
                 topBar
