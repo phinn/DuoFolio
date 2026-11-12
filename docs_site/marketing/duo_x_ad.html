@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root {
+    --paper:#fbfaf8; --deep:#f4f2ee; --ink:#26231e; --ink-soft:#6e6a62;
+    --line:#e6e3dd; --accent:#d8734a; --accent-soft:#f7ece4;
+  }
+  html,body { width:1200px; height:675px; overflow:hidden; }
+  body {
+    font-family: "Georgia", "Songti SC", serif;
+    background: var(--paper);
+    color: var(--ink);
+    position: relative;
+  }
+  body::before {
+    content:''; position:absolute; inset:0;
+    background-image: repeating-linear-gradient(0deg, transparent 0 39px, rgba(38,35,30,.035) 39px 40px);
+    pointer-events:none;
+  }
+  .top { position:absolute; top:54px; left:64px; right:64px; display:flex; justify-content:space-between; align-items:flex-start; }
+  .brand { display:flex; align-items:center; gap:18px; }
+  .brand img { width:72px; height:72px; border-radius:16px; box-shadow: 0 2px 12px rgba(38,35,30,.12); }
+  .brand-name { font-size:26px; letter-spacing:.18em; font-weight:700; color:var(--ink); }
+  .brand-sub { font-size:13px; letter-spacing:.14em; color:var(--ink-soft); margin-top:5px; text-transform:uppercase; }
+  .pill {
+    font-size:15px; letter-spacing:.06em; color:var(--ink);
+    background:var(--accent-soft); border:1px solid #ecd8c9; padding:10px 20px; border-radius:999px; font-family:"Helvetica Neue",sans-serif;
+  }
+  .pill b { color:var(--accent); }
+  .hero { position:absolute; left:64px; top:172px; width:520px; }
+  .kicker { font-size:15px; letter-spacing:.22em; color:var(--accent); font-weight:700; margin-bottom:14px; text-transform:uppercase; font-family:"Helvetica Neue",sans-serif; }
+  h1 { font-size:53px; line-height:1.13; font-weight:700; letter-spacing:-.01em; }
+  h1 .fold { color:var(--accent); }
+  .lede { margin-top:18px; font-size:18px; line-height:1.5; color:var(--ink-soft); max-width:460px; }
+  .feats { margin-top:20px; display:flex; flex-direction:column; gap:9px; }
+  .feat { display:flex; gap:11px; align-items:baseline; font-size:16px; color:var(--ink); font-family:"Helvetica Neue",sans-serif; }
+  .feat .tick { color:var(--accent); font-weight:700; }
+  .feat small { color:var(--ink-soft); }
+  .device-wrap { position:absolute; right:84px; top:114px; width:384px; height:452px; }
+  .gutter-glow {
+    position:absolute; inset:-40px;
+    background: radial-gradient(closest-side, rgba(216,115,74,.10), transparent 72%);
+    pointer-events:none;
+  }
+  .device {
+    position:absolute; inset:0;
+    border-radius:38px;
+    background:#1c1a17;
+    box-shadow: 0 24px 60px rgba(38,35,30,.28), 0 4px 16px rgba(38,35,30,.16);
+  }
+  .screen { position:absolute; inset:10px; border-radius:30px; overflow:hidden; background:var(--paper); display:flex; }
+  .page { flex:1; padding:34px 26px 28px; position:relative; }
+  .page.l { border-right:1px solid var(--line); background:linear-gradient(90deg, rgba(38,35,30,.015), transparent 22%); }
+  .page.r { background:linear-gradient(270deg, rgba(38,35,30,.03), transparent 22%); }
+  .p-num { position:absolute; bottom:12px; left:0; width:100%; text-align:center; font-size:11px; color:var(--ink-soft); font-family:"Helvetica Neue",sans-serif; letter-spacing:.1em; }
+  .chap { font-size:13px; letter-spacing:.2em; color:var(--accent); text-transform:uppercase; margin-bottom:14px; font-family:"Helvetica Neue",sans-serif; }
+  .htitle { font-size:24px; line-height:1.25; font-weight:700; margin-bottom:16px; }
+  .para { font-size:13.2px; line-height:1.72; color:var(--ink); opacity:.88; }
+  .sk { height:9px; border-radius:4px; background:rgba(38,35,30,.13); margin-top:10px; }
+  .sk.w9 { width:92%; } .sk.w8 { width:84%; } .sk.w7 { width:76%; } .sk.w6 { width:64%; }
+  .page.r .sk { background:rgba(38,35,30,.10); }
+  .hinge {
+    position:absolute; left:50%; top:0; bottom:0; width:2px; transform:translateX(-50%);
+    background: linear-gradient(180deg, transparent, rgba(216,115,74,.55), transparent);
+  }
+  .fold-note { display:none; }
+  .foot {
+    position:absolute; left:64px; right:64px; bottom:44px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--line); padding-top:20px;
+    font-family:"Helvetica Neue",sans-serif;
+  }
+  .price-line { font-size:17px; color:var(--ink); }
+  .price-line b { font-size:24px; color:var(--accent); font-weight:800; letter-spacing:-.01em; }
+  .cta { font-size:14px; letter-spacing:.12em; color:var(--ink-soft); text-transform:uppercase; }
+  .cta b { color:var(--ink); }
+</style>
+</head>
+<body>
+  <div class="top">
+    <div class="brand">
+      <img src="icon512.png" alt="">
+      <div>
+        <div class="brand-name">DUOFOLIO</div>
+        <div class="brand-sub">Reader for iPhone Duo</div>
+      </div>
+    </div>
+    <div class="pill"><b>Local-only</b> · no account · no tracking</div>
+  </div>
+
+  <div class="hero">
+    <div class="kicker">iPhone Duo · Fold-aware reading</div>
+    <h1>One book,<br>opened <span class="fold">like a book.</span></h1>
+    <div class="lede">A layout engine designed for the fold — unfold into a true two-page spread, fold back into a single flowing column.</div>
+    <div class="feats">
+      <div class="feat"><span class="tick">✓</span><span>Paper-feel gutter <small>— separate left / right pages</small></span></div>
+      <div class="feat"><span class="tick">✓</span><span>Cover bookmark <small>— close to see cover, title &amp; progress</small></span></div>
+      <div class="feat"><span class="tick">✓</span><span>Local-only <small>— your EPUBs stay yours · position memory</small></span></div>
+    </div>
+  </div>
+
+  <div class="device-wrap">
+    <div class="gutter-glow"></div>
+    <div class="device">
+      <div class="screen">
+        <div class="page l">
+          <div class="chap">Chapter Three</div>
+          <div class="htitle">The Long<br>Corridor</div>
+          <div class="para">She counted the doors as she went —</div>
+          <div class="sk w9"></div><div class="sk w8"></div><div class="sk w7"></div><div class="sk w6"></div>
+          <div class="sk w9"></div><div class="sk w8"></div>
+          <div class="p-num">— 41 —</div>
+        </div>
+        <div class="page r">
+          <div class="para">…and then the corridor turned.</div>
+          <div class="sk w9"></div><div class="sk w8"></div><div class="sk w7"></div><div class="sk w6"></div>
+          <div class="sk w9"></div><div class="sk w7"></div>
+          <div class="p-num">— 42 —</div>
+        </div>
+        <div class="hinge"></div>
+      </div>
+    </div>
+    <div class="fold-note">FOLD · UNFOLD</div>
+  </div>
+
+  <div class="foot">
+    <div class="price-line"><b>$6.99</b> &nbsp;one-time · lifetime</div>
+    <div class="cta"><b>App Store</b> — search "DuoFolio"</div>
+  </div>
+</body>
+</html>
