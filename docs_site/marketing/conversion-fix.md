@@ -48,7 +48,8 @@ read,book,epub,reader,pdf,foldable,duo,spread,dual,screen,fold,two,page
 
 词表说明(选词依据):
 - `read,book`:大词照留(现 search impressions 大头来自泛词,维持入口)
-- `pdf`:Info.plist 已声明 com.adobe.pdf 支持,白捡一个大流量词ge,spread`:Duo 意向词全占
+- `pdf`:Info.plist 已声明 com.adobe.pdf 支持,白捡一个大流量词
+- `foldable,fold,duo,dual,screen,two,page,spread`:Duo 意向词全占
 - Apple 自动组合:epub reader / book reader / foldable reader / dual screen book...
 - 不放:trilogy/iron vest 类自身无关联词;逗号后**不加空格**;不放 app 名自身
 
@@ -139,11 +140,20 @@ $6.99, one-time. Free updates.
 - [ ] 四语 promo text → PATCH 同端点字段 `promotionalText`
 - [ ] 8 张 6.7" 截图替换上传(范式 `release/screenshots/upload_ipad13.py`,槽位改 `APP_IPHONE_67`,版本 ID 用 1.0.4 `2b16f35f-716c-4766-95f0-372079635f4e`)
 
-## H. 用户手贴项(ASC 网页,约 10 分钟)
+## H. 用户动作项(2026-11-13 更新:API 侧已全部推完,剩 3 步)
 
-- [ ] en-US 描述整段替换(C 节文案)——描述无独立 API 改动端点之外的便捷通路,手贴最稳
-- [ ] 核对 API 推完后的四语预览(重点:subtitle 截断、截图排序)
-- [ ] E 节降价版 promo 文案在降价当天替换(或届时喊助手 API 替换)
+**API 已完成(免手贴):** promo 四语已生效(1.0.4 上直接改,线上即时可见);1.0.5 版本已建好并装配齐全
+—— subtitle 四语、en 新描述、keywords 71/100、whatsNew、20 张截图(四语 67×2+DUO+iPad×2)。
+desc/keywords/subtitle 因 ASC 锁定规则(无进行中版本时锁死)走 1.0.5 生效。
+
+剩余 3 步(全部是你才能做的):
+- [ ] **① build 上传**:Xcode 打开 DuoFolio(project.yml 已 bump 1.0.5/Build 8,xcodegen 已跑),
+      直接 Product → Archive → Distribute(同签名证书)。build 8 上传后 ASC 会自动把 1.0.5 版本与
+      build 8 配对(版本号匹配规则)。**不提交审核,只是把 build 挂上。**
+- [ ] **② 核对 1.0.5 预览**:ASC 网页检查四语 listing(subtitle 截断/截图排序/描述格式),
+      没问题后点「提交以供审核」——这是唯一触发审核的动作,时机你定
+- [ ] **③ 降价 + promo 联动**(playbook 见 price-drop-playbook.md):建议提交审核同时把
+      Tier 7→3 降价生效日定在过审当天,喊助手 API 替换 promo 为降价版文案
 
 ---
 

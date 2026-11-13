@@ -23,8 +23,8 @@ targets:
       path: DuoFolio/Info.plist
       properties:
         CFBundleDisplayName: DuoFolio
-        CFBundleShortVersionString: "1.0.4"
-        CFBundleVersion: "7"
+        CFBundleShortVersionString: "1.0.5"
+        CFBundleVersion: "8"
         UILaunchScreen: {}
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
