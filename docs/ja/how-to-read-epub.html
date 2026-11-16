@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone で EPUB を読む方法（2026年版・DRM の落とし穴つき）</title>
+<meta name="description" content="EPUB を iPhone に入れて読む手順を順番に。iPhone Duo で見開き表示にする方法、calibre で MOBI / AZW3 を EPUB に変換する方法、そして DRM 付きの Kindle 本が開かない理由。">
+<link rel="canonical" href="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html">
+<link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html">
+<link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DuoFolio">
+<meta property="og:title" content="iPhone で EPUB を読む方法">
+<meta property="og:description" content="端末に本を入れて、折りたたみで見開きにするまで。ほとんどの解説が飛ばす DRM の話も。">
+<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/reading.png">
+<meta property="og:url" content="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html">
+
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "iPhone で EPUB を読む方法",
+  "description": "EPUB を iPhone に取り込み、リーダーで開く手順。iPhone Duo での見開き表示まで。",
+  "totalTime": "PT5M",
+  "inLanguage": "ja",
+  "datePublished": "2026-11-16",
+  "dateModified": "2026-11-16",
+  "step": [
+    { "@type": "HowToStep", "name": "まず端末から見える場所にファイルを置く", "text": "iCloud Drive に入れるか、AirDrop・メール・メッセージで自分に送ります。どの経路も最後は「ファイル」アプリに集まります。" },
+    { "@type": "HowToStep", "name": "プレビューではなくリーダーで開く", "text": "「ファイル」で EPUB をタップするとプレビューが開くだけです。共有メニューからリーダーに渡すか、リーダー側の書棚画面から取り込みます。" },
+    { "@type": "HowToStep", "name": "DRM の有無を先に確認する", "text": "Kindle・Kobo・Google Play で買った EPUB は DRM で暗号化されており、第三者のリーダーでは開けません。Project Gutenberg や Standard Ebooks、多くの独立系出版社の本は DRM なしです。" },
+    { "@type": "HowToStep", "name": "calibre で他の形式から変換する", "text": "MOBI・AZW3 などの形式は、パソコンの calibre で EPUB に変換できます。書籍を追加 → 書籍を変換 → 出力形式に EPUB を指定 → できたファイルを iCloud Drive へ。" },
+    { "@type": "HowToStep", "name": "iPhone Duo では横にして見開きにする", "text": "折りたたみに対応したリーダーなら、偶数ページが左半分、奇数ページが右半分に配置され、折り目がノドの位置に来ます。" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="./">DuoFolio</a>
+    <a class="link" href="reading-apps.html">リーダー比較</a>
+    <a class="link hide-sm" href="how-to-read-epub.html">EPUB の入れ方</a>
+    <span class="spacer"></span>
+    <a class="lang" href="../how-to-read-epub.html">EN</a>
+    <a class="lang" href="../zh/how-to-read-epub.html">中文</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <p style="font-size:13px;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase">ガイド · 2026 年 11 月 16 日更新</p>
+  <h1 class="serif" style="font-size:37px;line-height:1.25;margin:10px 0 18px;letter-spacing:-0.4px">iPhone で EPUB を読む方法</h1>
+
+  <p class="lead-p">iPhone で EPUB を読むこと自体は問題なくできます。つまずくのはたいてい次の 3 つのどれかです。ファイルが端末から見える場所に届いていない、実は DRM でロックされている、あるいはそもそも本物の EPUB ではない。</p>
+
+  <p>この 3 つを順に片づけてから、折りたたみ端末ならではの最後の一手、細長い 1 段組みではなく本物の見開きで開かせる方法を扱います。</p>
+
+  <h2 class="serif" style="margin-top:44px">ステップ 1 · 端末から見える場所に置く</h2>
+  <p>どの経路も最後は同じ場所に集まります。<strong>「ファイル」アプリ</strong>です。いちばん面倒でないものを選んでください。</p>
+  <ul>
+    <li><strong>iCloud Drive</strong> — Mac や PC で iCloud Drive に EPUB を入れると、iPhone の「ファイル → iCloud Drive」に出てきます。まとめて入れるならこれ。</li>
+    <li><strong>AirDrop</strong> — Mac でファイルを右クリック → 共有 → AirDrop。iPhone 側で開くアプリをすぐ尋ねられます。</li>
+    <li><strong>自分宛にメールかメッセージ</strong> — 添付をタップし、共有アイコンから「ファイルに保存」。</li>
+    <li><strong>Safari で直接ダウンロード</strong> — 共有メニューに渡るので、その場で開かず「ファイルに保存」を選びます。</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>いちばん多いつまずき：</strong>「ファイル」で EPUB をタップして開くのは<em>プレビュー</em>で、リーダーではありません。書棚も、読書位置の記憶も、組版の設定もありません。だから「iPhone ではうまく読めない」という結論になります。共有メニューからリーダーに渡すのが正解です。</p>
+  </div>
+
+  <h2 class="serif" style="margin-top:52px">ステップ 2 · DRM の有無を確認する</h2>
+  <p>ほとんどの解説が飛ばす部分で、「アプリが本を開かない」という不満の大きな部分を占めます。</p>
+  <p><strong>Kindle（Amazon）、Kobo、Google Play</strong> で購入した EPUB には DRM がかかっています。販売元のソフトだけが復号できる形で暗号化されており、iOS の第三者のリーダーはそれを解除できませんし、許されてもいません。これらのストアで買った本なら、答えは専用アプリであって、より高性能なリーダーではありません。</p>
+  <p>どこでも開ける本：</p>
+  <ul>
+    <li><strong>Project Gutenberg</strong> — パブリックドメイン。EPUB のダウンロードは 1 クリック。</li>
+    <li><strong>Standard Ebooks</strong> — こちらもパブリックドメインですが、組版が専門的で、商用 EPUB より源ファイルの質が高いことが多いです。</li>
+    <li>多くの<strong>独立系出版社</strong>と著者直販の本は DRM なしで配られることが多い。</li>
+    <li>自分で書いた文書を書き出したもの。</li>
+  </ul>
+  <p>素早い判定法：EPUB は実体が ZIP アーカイブです。パソコンで拡張子を <code>.zip</code> に変えて開いてみてください。開けて <code>META-INF</code> フォルダが見えれば DRM なしで構造も正常、開けなければロックされています。</p>
+
+  <h2 class="serif" style="margin-top:52px">ステップ 3 · calibre で MOBI / AZW3 / PDF を変換する</h2>
+  <p>古い Kindle 形式や各種の電子書籍ファイルは <strong>calibre</strong> で最もきれいに変換できます。無料で macOS・Windows・Linux で動きます。</p>
+  <ol>
+    <li>calibre を入れて、本を書庫ウィンドウにドラッグします。</li>
+    <li>その本を選び、<strong>「書籍を変換」</strong>をクリック。</li>
+    <li>出力形式に <strong>EPUB</strong> を指定して実行。冊数が多いなら「一括変換」を使います。</li>
+    <li>変換後の書名を右クリック → <strong>「保存先フォルダを開く」</strong>で EPUB を iCloud Drive にコピー。</li>
+  </ol>
+  <p>calibre は DRM 付きの本の変換を拒否します。これ自体が便利な診断になります。DRM のエラーですぐ失敗するなら、そのファイルについての疑問には答えが出ています。</p>
+
+  <h2 class="serif" style="margin-top:52px">ステップ 4 · iPhone Duo では「1 段組み」ではなく「見開き」を</h2>
+  <p>普通の iPhone では、リーダーの版面は 1 段組みしかありません。折りたたみ端末には 2 つ目の選択肢があり、この端末で本を読む価値はそこにあります。</p>
+  <p>Duo を開いて横向きにしてください。折りたたみを前提に書かれたリーダーは、<strong>偶数ページを左半分、奇数ページを右半分</strong>に置き、折り目を 2 ページの間のノドに落とします。文庫本を開いたときと同じ幾何です。一方、対応しただけのリーダーは、1 段組みのテキストを内側ディスプレイ全体に広げます。これは本ではなく、とても横長のスマートフォンとして読む感覚になります。</p>
+  <p>この差は 1 秒で分かりますし、この端末用にリーダーを検討するときに Worth があるのは、実質的にこの 1 点だけのテストです。現時点の候補の比較は<a href="reading-apps.html">こちら</a>。</p>
+
+  <h2 class="serif" style="margin-top:52px">よくある症状の早見表</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:38%">症状</th><th>原因</th></tr></thead>
+      <tbody>
+        <tr><td>開くが文字が極端に小さく、大きくできない</td><td>固定レイアウトの EPUB。漫画や図版の多い本に多い。文字サイズがページに埋め込まれています。</td></tr>
+        <tr><td>書式なしのプレーンテキストで開く</td><td>実体が HTML や TXT で、拡張子だけ .epub にしたファイル。calibre で正しく変換してください。</td></tr>
+        <tr><td>表紙画像が出ない</td><td>calibre の変換時に外れたケースが多い。変換前に「メタデータの編集」で表紙を入れ直します。</td></tr>
+        <tr><td>アプリを切り替えると読書位置が消える</td><td>そのリーダーに永続的な書棚がない。位置の記憶はリーダーの機能で、iOS の機能ではありません。</td></tr>
+        <tr><td>エラーも出ずに開かない</td><td>ほぼ DRM です。ステップ 2 を参照。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cta">
+    <div class="serif">Duo でこのページを読んでいますか。</div>
+    <p style="margin-top:10px">DuoFolio は見開き表示と、背面を表紙カードにする表示を担当します。$6.99、アカウント不要、ファイルは端末の中に。</p>
+    <br>
+    <a class="btn" href="https://apps.apple.com/app/id6823855712">DuoFolio を入手</a>
+    <div class="btn-note">または<a href="reading-apps.html">無料の選択肢を先に比較する</a>。</div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="./">DuoFolio</a>
+      <a href="reading-apps.html">比較</a>
+      <a href="../privacy.html">プライバシー</a>
+      <a href="../how-to-read-epub.html">English</a>
+      <a href="../zh/how-to-read-epub.html">中文</a>
+    </div>
+    <p>DuoFolio はデータを収集しません。サポート：<a href="mailto:phinn@kinet.app">phinn@kinet.app</a></p>
+    <p style="margin-top:8px">© 2026 Kinet. iPhone Duo は Apple Inc. の商標です。DuoFolio は Apple と提携していません。</p>
+  </footer>
+
+</div>
+</body>
+</html>

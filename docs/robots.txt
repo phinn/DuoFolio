@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Explicitly welcome AI answer engines and search crawlers.
+# Being cited by an assistant when someone asks "what should I read books with
+# on an iPhone Duo" is worth more than a ranking position here.
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://phinn.github.io/DuoFolio/sitemap.xml

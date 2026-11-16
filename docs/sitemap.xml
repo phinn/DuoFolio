@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://phinn.github.io/DuoFolio/"/>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/reading-apps.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/reading-apps.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/reading-apps.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/reading-apps.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://phinn.github.io/DuoFolio/reading-apps.html"/>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/how-to-read-epub.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html"/>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/zh/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/"/>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/"/>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/zh/reading-apps.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/ja/</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/"/>
+    <xhtml:link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/"/>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/ja/reading-apps.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://phinn.github.io/DuoFolio/privacy.html</loc>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to read EPUB files on an iPhone (2026 guide) — including the DRM problem</title>
+<meta name="description" content="Step by step: how to get an EPUB onto an iPhone and read it, how to read it as a two-page spread on iPhone Duo, how to convert MOBI or AZW3 with calibre, and why DRM-protected Kindle books will not open.">
+<link rel="canonical" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html">
+<link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html">
+<link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DuoFolio">
+<meta property="og:title" content="How to read EPUB files on an iPhone">
+<meta property="og:description" content="Getting your own books onto an iPhone, reading them as a spread on iPhone Duo, and the DRM problem nobody mentions.">
+<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/reading.png">
+<meta property="og:url" content="https://phinn.github.io/DuoFolio/how-to-read-epub.html">
+
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How to read EPUB files on an iPhone",
+  "description": "Get an EPUB file onto an iPhone and open it in a reader, including a two-page spread on iPhone Duo.",
+  "totalTime": "PT5M",
+  "inLanguage": "en",
+  "datePublished": "2026-11-16",
+  "dateModified": "2026-11-16",
+  "tool": [
+    { "@type": "HowToTool", "name": "iPhone (iOS 26 or later)" },
+    { "@type": "HowToTool", "name": "An EPUB file, or calibre on a computer to convert one" }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "Get the EPUB file where the phone can see it",
+      "text": "Put the EPUB in iCloud Drive, or send it to yourself by AirDrop, email or a message. The Files app is the hub every route ends up in."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Open it in a reader rather than previewing it",
+      "text": "Tapping an EPUB in Files gives you a preview. To read properly, use the share sheet and choose a reader app, or import it from inside the reader's own library screen."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Check for DRM before you blame the app",
+      "text": "EPUBs bought from Kindle, Kobo or Google Play carry DRM. No third-party reader can open them. Books from Project Gutenberg, Standard Ebooks, or an independent publisher are usually DRM-free."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "Convert other formats with calibre",
+      "text": "MOBI, AZW3 and older formats convert to EPUB in calibre on a computer. Add the book, choose Convert books, select EPUB as the output format, then copy the result to the phone."
+    },
+    {
+      "@type": "HowToStep",
+      "name": "On iPhone Duo, turn the phone sideways for a spread",
+      "text": "A reader that supports the fold will lay out even pages on the left half and odd pages on the right, with the hinge sitting in the gutter between them."
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I read a Kindle book in another reader app?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not if it is DRM-protected, which is the default for books bought from Amazon. The file is encrypted to Amazon's reader, and no third-party app is permitted to decrypt it. The only route is Amazon's own apps."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my EPUB open as a blank or garbled page?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually because the file is not a real EPUB. Some sites hand out HTML files, or EPUBs with broken internal structure, renamed to .epub. Opening the file on a computer with calibre will tell you immediately whether the structure is valid."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where can I get free EPUB books legally?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Project Gutenberg and Standard Ebooks both publish public-domain titles as clean, well-made EPUBs. Standard Ebooks in particular produces editions with typography good enough that layout quality becomes noticeable."
+      }
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="./">DuoFolio</a>
+    <a class="link" href="reading-apps.html">Reading apps compared</a>
+    <a class="link hide-sm" href="how-to-read-epub.html">Read your own EPUB</a>
+    <span class="spacer"></span>
+    <a class="lang" href="zh/how-to-read-epub.html">中文</a>
+    <a class="lang" href="ja/how-to-read-epub.html">日本語</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <p style="font-size:13px;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase">Guide · updated 16 November 2026</p>
+  <h1 class="serif" style="font-size:40px;line-height:1.15;margin:10px 0 18px;letter-spacing:-0.6px">How to read EPUB files on an iPhone</h1>
+
+  <p class="lead-p">An iPhone can read EPUB files perfectly well. What usually goes wrong is not the reading — it is one of three things: the file never lands where the phone can see it, the file turns out to be DRM-locked, or it is not really an EPUB at all.</p>
+
+  <p>This guide covers all three, then the part specific to iPhone Duo: getting a book to open as a genuine two-page spread instead of one long column.</p>
+
+  <h2 class="serif" style="margin-top:44px">Step 1 — Get the file where the phone can see it</h2>
+  <p>Every route ends up in the same place: the <strong>Files</strong> app. Pick whichever is least annoying.</p>
+  <ul>
+    <li><strong>iCloud Drive</strong> — drop the EPUB into iCloud Drive on a Mac or PC and it appears under Files → iCloud Drive on the phone. Best for a batch of books.</li>
+    <li><strong>AirDrop</strong> — from a Mac, right-click the file → Share → AirDrop. The phone offers to open it in an app immediately.</li>
+    <li><strong>Email or a message to yourself</strong> — tap the attachment, then the share icon, then Save to Files.</li>
+    <li><strong>Direct download</strong> — Safari will hand the file to the share sheet. Choose Save to Files rather than opening it in place.</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>The most common failure:</strong> tapping the EPUB inside Files opens a <em>preview</em>, not a reading app. A preview has no library, no progress memory and no typography settings — which is why people conclude "it doesn't work properly". Use the share sheet to hand the file to a reader instead.</p>
+  </div>
+
+  <h2 class="serif" style="margin-top:52px">Step 2 — Check for DRM before blaming the app</h2>
+  <p>This is the part most guides skip, and it is the reason a large share of "the app won't open my book" complaints exist.</p>
+  <p>EPUBs sold by <strong>Amazon Kindle, Kobo and Google Play</strong> are wrapped in DRM. The file is encrypted so that only the seller's own software can decrypt it. No third-party reader on iOS is permitted to break that, and none legitimately can. If your book came from one of those stores, the answer is their app, not a reader.</p>
+  <p>Books that will open anywhere:</p>
+  <ul>
+    <li>Anything from <strong>Project Gutenberg</strong> — public domain, EPUB download is one click.</li>
+    <li>Anything from <strong>Standard Ebooks</strong> — public domain, but professionally typeset. Noticeably better source files than most commercial EPUBs.</li>
+    <li>Most <strong>independent publisher</strong> and direct-from-author sales, which frequently ship DRM-free.</li>
+    <li>Books you exported yourself from a document you wrote.</li>
+  </ul>
+  <p>To check quickly: an EPUB is a ZIP archive. On a computer, rename the extension to <code>.zip</code> and try to open it. If it opens and you can see a <code>META-INF</code> folder, the book has no DRM and is structurally valid. If it refuses to open, it is locked.</p>
+
+  <h2 class="serif" style="margin-top:52px">Step 3 — Convert MOBI, AZW3 or PDF with calibre</h2>
+  <p>Older Kindle formats and assorted e-book files convert cleanly with <strong>calibre</strong>, which is free and runs on macOS, Windows and Linux.</p>
+  <ol>
+    <li>Install calibre and drag the book into the library window.</li>
+    <li>Select the book, then click <strong>Convert books</strong>.</li>
+    <li>Set the output format to <strong>EPUB</strong> and confirm. For a large batch, use <em>Bulk convert</em> instead.</li>
+    <li>Right-click the converted title → <strong>Open containing folder</strong>, and copy the EPUB to iCloud Drive.</li>
+  </ol>
+  <p>Calibre will refuse to convert a DRM-protected book, which is itself a useful diagnostic: if the conversion fails immediately with an error about DRM, you have your answer about the file.</p>
+
+  <h2 class="serif" style="margin-top:52px">Step 4 — On iPhone Duo, ask for a spread, not a column</h2>
+  <p>On a normal iPhone, a reader has one sensible layout: one column of text. A foldable has a second option, and it is the one that makes the device worth reading on.</p>
+  <p>Hold the Duo open and turn it sideways. A reader that was built for the fold will put <strong>even pages on the left half and odd pages on the right</strong>, with the hinge sitting in the gutter between them — the same geometry as a paperback held open. A reader that was merely made compatible will instead stretch a single column across the whole inner display, which reads like a very wide phone rather than a book.</p>
+  <p>The difference is visible in one second, and it is the only test worth applying to any reader you are considering for this device. Our own comparison of the current options is <a href="reading-apps.html">here</a>.</p>
+
+  <h2 class="serif" style="margin-top:52px">Common problems, briefly</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:38%">Symptom</th><th>Cause</th></tr></thead>
+      <tbody>
+        <tr><td>Opens but text is tiny and cannot be resized</td><td>The book is a fixed-layout EPUB, common for comics and illustrated titles. Text size is baked into the page.</td></tr>
+        <tr><td>Opens as plain text with no formatting</td><td>The file is HTML or TXT renamed to .epub. Convert it properly with calibre.</td></tr>
+        <tr><td>Cover art missing</td><td>Often stripped by calibre during conversion. Re-add it with <em>Edit metadata</em> before converting again.</td></tr>
+        <tr><td>Reading position lost after switching apps</td><td>The reader has no persistent library. Position memory is a reader feature, not an iOS one.</td></tr>
+        <tr><td>Refuses to open, with no error</td><td>Almost always DRM. See step 2.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cta">
+    <div class="serif">Reading this on a Duo?</div>
+    <p style="margin-top:10px">DuoFolio does the two-page spread and turns the outer display into a cover card. $6.99, no account, your files stay on the phone.</p>
+    <br>
+    <a class="btn" href="https://apps.apple.com/app/id6823855712">Get DuoFolio</a>
+    <div class="btn-note">Or <a href="reading-apps.html">compare the free options first</a>.</div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="./">DuoFolio</a>
+      <a href="reading-apps.html">Comparison</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="zh/how-to-read-epub.html">中文</a>
+      <a href="ja/how-to-read-epub.html">日本語</a>
+    </div>
+    <p>DuoFolio collects no data. Support: <a href="mailto:phinn@kinet.app">phinn@kinet.app</a></p>
+    <p style="margin-top:8px">© 2026 Kinet. iPhone Duo is a trademark of Apple Inc. DuoFolio is not affiliated with Apple.</p>
+  </footer>
+
+</div>
+</body>
+</html>

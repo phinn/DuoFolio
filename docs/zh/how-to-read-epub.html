@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iPhone 上怎么读 EPUB 文件（2026 完整步骤，含 DRM 问题）</title>
+<meta name="description" content="分步说明：怎么把 EPUB 传到 iPhone 并正常阅读、怎么在 iPhone Duo 上读成双页对开、怎么用 calibre 把 MOBI / AZW3 转成 EPUB，以及为什么带 DRM 的 Kindle 书打不开。">
+<link rel="canonical" href="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html">
+<link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/how-to-read-epub.html">
+<link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/how-to-read-epub.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DuoFolio">
+<meta property="og:title" content="iPhone 上怎么读 EPUB 文件">
+<meta property="og:description" content="把书弄进手机、在折叠屏上读成双页，以及几乎所有教程都不提的 DRM 问题。">
+<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/reading.png">
+<meta property="og:url" content="https://phinn.github.io/DuoFolio/zh/how-to-read-epub.html">
+
+<link rel="stylesheet" href="../assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "iPhone 上怎么读 EPUB 文件",
+  "description": "把 EPUB 传到 iPhone 并用阅读器正常打开，包括在 iPhone Duo 上读成双页对开。",
+  "totalTime": "PT5M",
+  "inLanguage": "zh-Hans",
+  "datePublished": "2026-11-16",
+  "dateModified": "2026-11-16",
+  "step": [
+    { "@type": "HowToStep", "name": "先把文件放到手机看得到的地方", "text": "放进 iCloud 云盘，或用隔空投送、邮件、信息发给自己。所有路径最后都会汇到「文件」App。" },
+    { "@type": "HowToStep", "name": "用阅读器打开，而不是用预览", "text": "在「文件」里直接点 EPUB 只会打开预览。要正常阅读，用分享菜单选择阅读器，或在阅读器自己的书库里导入。" },
+    { "@type": "HowToStep", "name": "先确认有没有 DRM", "text": "从 Kindle、Kobo、Google Play 买来的 EPUB 带 DRM 加密，任何第三方阅读器都打不开。古登堡计划、Standard Ebooks 以及多数独立出版的书通常没有 DRM。" },
+    { "@type": "HowToStep", "name": "用 calibre 转换其他格式", "text": "MOBI、AZW3 以及更老的格式可以用电脑上的 calibre 转成 EPUB：添加书籍 → 转换书籍 → 输出格式选 EPUB → 把结果拷进 iCloud 云盘。" },
+    { "@type": "HowToStep", "name": "在 iPhone Duo 上横过来读成对开", "text": "支持折叠的阅读器会把偶数页放在左半、奇数页放在右半，折痕落在两页之间的中缝上。" }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="./">DuoFolio</a>
+    <a class="link" href="reading-apps.html">阅读器横评</a>
+    <a class="link hide-sm" href="how-to-read-epub.html">导入自己的 EPUB</a>
+    <span class="spacer"></span>
+    <a class="lang" href="../how-to-read-epub.html">EN</a>
+    <a class="lang" href="../ja/how-to-read-epub.html">日本語</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <p style="font-size:13px;color:var(--ink-faint);letter-spacing:.04em;text-transform:uppercase">指南 · 2026 年 11 月 16 日更新</p>
+  <h1 class="serif" style="font-size:38px;line-height:1.2;margin:10px 0 18px;letter-spacing:-0.5px">iPhone 上怎么读 EPUB 文件</h1>
+
+  <p class="lead-p">iPhone 读 EPUB 本身没问题。真正出事的通常是三件事之一：文件没落到手机看得见的地方、文件其实带 DRM 锁、或者它根本不是真的 EPUB。</p>
+
+  <p>下面把三种情况都讲清楚，最后再说折叠屏专属的那一步：怎么让书打开成真正的双页，而不是一根拉长了的单栏。</p>
+
+  <h2 class="serif" style="margin-top:44px">第一步 · 把文件放到手机看得到的地方</h2>
+  <p>所有路径最后都汇到同一个地方：<strong>「文件」App</strong>。挑最省事的那条就行。</p>
+  <ul>
+    <li><strong>iCloud 云盘</strong> — 在 Mac 或 PC 上把 EPUB 拖进 iCloud 云盘，手机上「文件 → iCloud 云盘」就能看到。适合一次传一批。</li>
+    <li><strong>隔空投送</strong> — Mac 上右键文件 → 共享 → 隔空投送。手机会立刻问你要用什么打开。</li>
+    <li><strong>发邮件或信息给自己</strong> — 点开附件，点分享图标，选「存储到文件」。</li>
+    <li><strong>Safari 直接下载</strong> — 下载完会交给分享菜单，选「存储到文件」而不是就地打开。</li>
+  </ul>
+
+  <div class="callout">
+    <p><strong>最常见的翻车点：</strong>在「文件」里点 EPUB，打开的是一个<em>预览</em>，不是阅读器。预览没有书库、不记进度、不能调排版——于是很多人就得出"在 iPhone 上读 EPUB 不行"的结论。正确做法是用分享菜单把文件交给阅读器。</p>
+  </div>
+
+  <h2 class="serif" style="margin-top:52px">第二步 · 先确认有没有 DRM</h2>
+  <p>这是几乎所有教程都跳过的部分，也是"应用打不开我的书"这类抱怨的主要来源。</p>
+  <p>从 <strong>Kindle（亚马逊）、Kobo、Google Play</strong> 买来的 EPUB 都包着 DRM。文件被加密成只有卖家的软件能解开。iOS 上的第三方阅读器既不被允许、也做不到绕过它。如果你的书来自这几家，答案是用它们自己的 App，而不是找一个更强的阅读器。</p>
+  <p>不锁区、随处能打开的书：</p>
+  <ul>
+    <li><strong>古登堡计划（Project Gutenberg）</strong> — 公版书，一键下载 EPUB。</li>
+    <li><strong>Standard Ebooks</strong> — 也是公版书，但排版是专业级的，源文件质量明显高于多数商业 EPUB。</li>
+    <li>多数<strong>独立出版</strong>和作者直销的书，常常是无 DRM 的。</li>
+    <li>你自己从文档导出的书。</li>
+  </ul>
+  <p>想快速判断：EPUB 本质是一个 ZIP 压缩包。在电脑上把扩展名改成 <code>.zip</code> 再试着打开，如果能打开并看到 <code>META-INF</code> 文件夹，说明这本书没有 DRM、结构也正常；如果打不开，就是被锁了。</p>
+
+  <h2 class="serif" style="margin-top:52px">第三步 · 用 calibre 转换 MOBI / AZW3 / PDF</h2>
+  <p>老的 Kindle 格式和各种零散电子书文件，用 <strong>calibre</strong> 转最干净。它免费，macOS、Windows、Linux 都能跑。</p>
+  <ol>
+    <li>装好 calibre，把书拖进书库窗口。</li>
+    <li>选中这本书，点 <strong>转换书籍</strong>。</li>
+    <li>输出格式选 <strong>EPUB</strong> 并确认。书多的话用「批量转换」。</li>
+    <li>右键这本已转换的书 → <strong>打开所在目录</strong>，把 EPUB 拷进 iCloud 云盘。</li>
+  </ol>
+  <p>calibre 会拒绝转换带 DRM 的书——这本身就是个好用的诊断：如果转换立刻报 DRM 错误，你关于这个文件的疑问就有答案了。</p>
+
+  <h2 class="serif" style="margin-top:52px">第四步 · 在 iPhone Duo 上要的是对开，不是单栏</h2>
+  <p>在普通 iPhone 上，阅读器只有一种合理版式：一栏文字。折叠屏多了第二种可能，而正是这一种让这台设备值得用来读书。</p>
+  <p>把 Duo 摊开、横过来。为折叠写过的阅读器会把<strong>偶数页放左半、奇数页放右半</strong>，折痕落在两页之间的中缝——和你把平装书摊开是同一个几何关系。而只是做了兼容的阅读器，会把一栏文字横铺到整个内屏上，读起来像一台非常宽的手机，而不是一本书。</p>
+  <p>这个差别一秒钟就能看出来，也是你评估任何一台阅读器时唯一值得做的测试。目前几个选项的对比在<a href="reading-apps.html">这里</a>。</p>
+
+  <h2 class="serif" style="margin-top:52px">常见问题速查</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:38%">症状</th><th>原因</th></tr></thead>
+      <tbody>
+        <tr><td>能打开，但字极小且调不大</td><td>这是固定版式 EPUB，漫画和图文书常见。字号是烘进页面里的。</td></tr>
+        <tr><td>打开是纯文本，没有排版</td><td>文件其实是 HTML 或 TXT 改的扩展名。用 calibre 正经转一次。</td></tr>
+        <tr><td>封面图不见了</td><td>多为 calibre 转换时被剥掉。转换前用「编辑元数据」重新加回封面。</td></tr>
+        <tr><td>切换应用后阅读进度丢了</td><td>那个阅读器没有持久书库。进度记忆是阅读器的功能，不是 iOS 的。</td></tr>
+        <tr><td>打不开又没有任何报错</td><td>基本可以确定是 DRM。看第二步。</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cta">
+    <div class="serif">在 Duo 上读这一页？</div>
+    <p style="margin-top:10px">DuoFolio 做双页对开，并把外屏变成封面进度卡。$6.99，不需要账号，文件留在手机里。</p>
+    <br>
+    <a class="btn" href="https://apps.apple.com/app/id6823855712">获取 DuoFolio</a>
+    <div class="btn-note">或者先<a href="reading-apps.html">看看免费方案</a>合不合适。</div>
+  </div>
+
+  <footer>
+    <div class="links">
+      <a href="./">DuoFolio</a>
+      <a href="reading-apps.html">横评</a>
+      <a href="../privacy.html">隐私政策</a>
+      <a href="../how-to-read-epub.html">English</a>
+      <a href="../ja/how-to-read-epub.html">日本語</a>
+    </div>
+    <p>DuoFolio 不收集任何数据。支持邮箱：<a href="mailto:phinn@kinet.app">phinn@kinet.app</a></p>
+    <p style="margin-top:8px">© 2026 Kinet. iPhone Duo 是 Apple Inc. 的商标。DuoFolio 与 Apple 无隶属关系。</p>
+  </footer>
+
+</div>
+</body>
+</html>
