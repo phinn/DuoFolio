@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DuoFolio — iPhone Duo のための見開き EPUB リーダー</title>
-<meta name="description" content="DuoFolio は iPhone Duo の折りたたみに合わせて設計された EPUB / PDF リーダーです。開けば本物の見開き、閉じれば背面ディスプレイがしおりに。アカウント不要、書籍は端末から出ません。日本語・英語・簡体字・繁体字に対応。">
+<title>DuoFolio — iPhone Duo の折り目に合わせて作られた見開き EPUB リーダー</title>
+<meta name="description" content="DuoFolio は iPhone Duo の折りたたみに合わせて設計した EPUB / PDF リーダー。開けば本物の見開き、ページは紙のようにめくれて、閉じればカバー画面がしおりになります。すべて端末内で完結。9言語、iPhone Duo と iPad に対応。">
 <link rel="canonical" href="https://phinn.github.io/DuoFolio/ja/">
 <link rel="alternate" hreflang="ja" href="https://phinn.github.io/DuoFolio/ja/">
 <link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/">
@@ -14,8 +14,8 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DuoFolio">
 <meta property="og:title" content="DuoFolio — iPhone Duo のための見開きリーダー">
-<meta property="og:description" content="開けば本物の見開き、閉じれば背面がしおりになる。書籍は端末の中だけに。">
-<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/hero-spread.png">
+<meta property="og:description" content="開けば本物の見開き、角をつまめば紙がめくれる。閉じればカバー画面がしおりになる。">
+<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/spread.jpg">
 <meta property="og:url" content="https://phinn.github.io/DuoFolio/ja/">
 
 <link rel="stylesheet" href="../assets/site.css">
@@ -26,13 +26,37 @@
   "name": "DuoFolio",
   "alternateName": "DuoFolio 見開きリーダー",
   "applicationCategory": "BookApplication",
+  "applicationSubCategory": "EPUB リーダー",
   "operatingSystem": "iOS 26 以降",
   "url": "https://phinn.github.io/DuoFolio/ja/",
   "downloadUrl": "https://apps.apple.com/app/id6823855712",
-  "description": "iPhone Duo の折りたたみに合わせて設計された EPUB / PDF リーダー。内側ディスプレイいっぱいの見開き、閉じた状態で背面に表紙と読書位置を表示。端末内だけで完結し、アカウントも通信も不要です。",
-  "image": "https://phinn.github.io/DuoFolio/screenshots/hero-spread.png",
+  "description": "iPhone Duo の折りたたみに合わせて設計した EPUB / PDF リーダー。開くと見開き、ページは紙のようにめくれ、閉じるとカバー画面に表紙と読書位置が出ます。読書はすべて端末内で完結します。",
+  "image": "https://phinn.github.io/DuoFolio/screenshots/spread.jpg",
+  "screenshot": [
+    "https://phinn.github.io/DuoFolio/screenshots/spread.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/library.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/cover.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/ipad.jpg"
+  ],
+  "video": {
+    "@type": "VideoObject",
+    "name": "DuoFolio — 閉じて、開いて、立てて",
+    "thumbnailUrl": "https://phinn.github.io/DuoFolio/media/ja/film.jpg",
+    "contentUrl": "https://phinn.github.io/DuoFolio/media/ja/film.mp4",
+    "uploadDate": "2026-11-18"
+  },
   "offers": { "@type": "Offer", "price": "6.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock" },
-  "inLanguage": ["ja", "en", "zh-Hans", "zh-Hant"],
+  "featureList": [
+    "本物の見開き表示",
+    "指に追従する紙のめくり",
+    "閉じるとカバー画面がしおりに",
+    "iPad 向けの専用レイアウト",
+    "端末内で完結する本棚、アカウント不要",
+    "セリフ本文と紙の色調テーマ",
+    "折りたたみ状態をまたいだ桁単位の位置記憶",
+    "9言語対応"
+  ],
+  "inLanguage": ["ja", "en", "zh-Hans", "zh-Hant", "ko", "de", "fr", "es", "pt-BR"],
   "author": { "@type": "Organization", "name": "Kinet" }
 }
 </script>
@@ -41,9 +65,9 @@
 
 <nav class="nav">
   <div class="nav-in">
-    <a class="brand" href="./">DuoFolio</a>
+    <a class="brand" href="../">DuoFolio</a>
     <a class="link" href="reading-apps.html">リーダー比較</a>
-    <a class="link hide-sm" href="how-to-read-epub.html">EPUB の入れ方</a>
+    <a class="link hide-sm" href="how-to-read-epub.html">自分の EPUB を読む</a>
     <span class="spacer"></span>
     <a class="lang" href="../">EN</a>
     <a class="lang" href="../zh/">中文</a>
@@ -51,50 +75,72 @@
 </nav>
 
 <div class="wrap">
-
   <div class="hero">
     <h1 class="serif">DuoFolio</h1>
-    <div class="tag">iPhone Duo の折りたたみに合わせて作った見開きリーダー</div>
-    <p class="lead">本が内側ディスプレイの左右にひとつながりの見開きとして広がります。開けば本物の二ページ、閉じれば背面ディスプレイがしおりに。取り込んだ書籍は端末の外に出ません。</p>
-    <img src="../screenshots/hero-spread.png" alt="iPhone Duo で DuoFolio を開き、紙の質感のノドを挟んで二ページ見開きで表示している画面">
-    <br>
-    <a class="btn" href="https://apps.apple.com/app/id6823855712">DuoFolio を入手 — $6.99</a>
-    <div class="btn-note">買い切りのみ · サブスクなし · アカウント不要 · 4 言語対応</div>
+    <div class="tag">iPhone Duo の折り目に合わせて作った見開きリーダー</div>
+    <p class="lead">本文は内側ディスプレイの左右にひと続きの見開きとして流れます。開けば本当の見開き、閉じればカバー画面がしおりになります。本棚は端末の外に出ません。</p>
+    <a class="btn" href="https://apps.apple.com/app/id6823855712">DuoFolio を入手 — US$6.99</a>
+    <div class="btn-note">買い切り · サブスクなし · アカウント不要 · 9言語 · iPhone Duo と iPad</div>
   </div>
+</div>
+
+<div class="wrap-wide">
+  <figure class="film" id="film">
+    <video poster="../media/ja/film.jpg" muted loop playsinline preload="none" aria-label="DuoFolio 20秒の紹介映像">
+      <source src="../media/ja/film.mp4" type="video/mp4">
+    </video>
+    <button class="film-play" type="button" aria-label="映像を再生"><span class="tri"></span></button>
+    <figcaption>20秒 · 音なし · iPhone Duo で収録</figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
 
   <section>
-    <h2 class="serif"><span class="num">01</span>引き伸ばした 1 ページではなく、本物の見開き</h2>
-    <div class="feature">
-      <div class="txt">
-        <p class="lead-p">端末を開けば、本も開く。</p>
-        <p>左が偶数ページ、右が奇数ページ。折り目がちょうどノドの位置に落ちます。DuoFolio がめくるのは紙一枚ぶんの単位で、1 段組みのテキストを広い画面に流し込んだものを「見開き」とは呼びません。</p>
-      </div>
-      <img src="../screenshots/reading.png" alt="DuoFolio の読書画面（iPhone Duo 内側ディスプレイ）">
-    </div>
+    <h2 class="serif"><span class="num">01</span>引き伸ばした1ページではなく、本物の見開き</h2>
+    <p class="lead-p">Duo を開けば、本も開く。</p>
+    <p>偶数ページが左、奇数ページが右。折り目の側には柔らかな紙の溝が走ります。DuoFolio がめくるのは紙そのもの——1段の本文を広い画面に流し込んで「見開き」と呼ぶことはしません。</p>
+    <img class="shot" src="../screenshots/spread.jpg" alt="iPhone Duo 上の DuoFolio。中央に紙の溝が入った本物の見開き">
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">02</span>閉じた瞬間、背面がしおりになる</h2>
-    <p>Duo を閉じると背面ディスプレイが表紙カードに変わります。表紙、書名、どこまで読んだか。端末を開かずに一目で分かります。もう一度開けば、離れた段からそのまま読書が続きます。閉じた状態でも、半開きでも、全開でも、位置はついてきます。</p>
+    <h2 class="serif"><span class="num">02</span>紙のようにめくれる</h2>
+    <p class="lead-p">角をつまめば、紙が指についてくる。</p>
+    <p>スライドでもフェードでもありません。紙が実際に巻れます——角がめくれて起き上がり、紙の裏が光を受けて、影が溝の側に落ちる。次の紙はもう下で待っています。途中まで引けばそこで止まり、離せばどちらかに落ち着きます。</p>
+    <p>折りたたみにだけできること：紙が紙として振る舞う、本のように開く端末の上で。</p>
+    <figure class="still">
+      <img src="../screenshots/spread-2.jpg" alt="DuoFolio の見開き。左右に1枚ずつ紙があり、中央に溝がある">
+      <figcaption>めくるのはいつも紙1枚まるごと——スライドでもフェードでも、段組みの作り直しでもありません。</figcaption>
+    </figure>
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">03</span>本棚は端末の中に留まる</h2>
-    <p>取り込んだ EPUB はアップロードされません。作るアカウントも、切るべき計測も、依存する通信もありません。読書位置・テーマ・文字サイズは端末内だけに保存されます。</p>
+    <h2 class="serif"><span class="num">03</span>閉じれば、しおりになる</h2>
+    <p>Duo を閉じると、外側の画面が表紙カードになります。表紙、書名、どこまで読んだか——端末を開かずに一目で分かります。もう一度開けば、離れた桁からそのまま続きます。閉じていても、半開きでも、全開でも。</p>
+    <img class="shot shot-cover" src="../screenshots/cover.jpg" alt="閉じた iPhone Duo の外側画面に出る DuoFolio の表紙カード">
+  </section>
+
+  <section>
+    <h2 class="serif"><span class="num">04</span>本棚は端末の中に</h2>
+    <p>読み込んだ EPUB はアップロードされません。作るアカウントも、切るべき解析も、ネットワークへの依存もありません。読書位置、テーマ、文字サイズは端末の中だけにあります。</p>
     <div class="callout">
-      <p><strong>リーダーにとって、これが重要な理由：</strong>読書アプリは、あなたが読んだものすべてを見る立場にあります。DuoFolio は「大切に扱います」と約束するのではなく、そもそも集めるものが存在しない作りにしています。</p>
+      <p><strong>リーダーでこれが効く理由：</strong>読書アプリは、読んだものすべてを見られます。DuoFolio は「大事に扱います」と約束するのではなく、そもそも集めるものが無いように作っています。</p>
     </div>
+    <img class="shot shot-narrow" src="../screenshots/library.jpg" alt="DuoFolio の本棚。読み込んだ本が並ぶ">
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">04</span>長時間読むための組版</h2>
-    <p>セリフの本文書体、調整した行間、紙の色のテーマ。数分ではなく数時間読む前提で組んでいます。インターフェースと本文は日本語・英語・簡体字・繁体字の 4 言語に対応しています。</p>
+    <h2 class="serif"><span class="num">05</span>長く読むためのタイポグラフィ</h2>
+    <p>セリフの本文、調整した行間、何分ではなく何時間のために作った紙の色調。画面が大きくなると本文欄は広がり、引き伸ばされはしません——iPad でも Duo でも同じ組版のルールです。</p>
+    <img class="shot" src="../screenshots/ipad.jpg" alt="iPad 上の DuoFolio。中央に寄せたセリフ本文">
+    <h3>9つの言語</h3>
+    <p>日本語、English、简体中文、繁體中文、한국어、Deutsch、Français、Español、Português (Brasil)——メニューだけでなく、画面もストアの掲載も。</p>
   </section>
 
   <section>
     <div class="story">
-      <p><strong>個人開発者が作りました。</strong>出発点はひとつの問いだけです。本のように開く端末で、読書はどう感じられるべきか。</p>
-      <p style="margin-top:12px">DuoFolio は折りたたみを前提に書かれていて、折りたたみの上でたまたま動くアプリではありません。他の候補と迷っているなら、次のページに正直な比較があります。無料のものを選ぶべきケースも含めて書いています。</p>
+      <p><strong>ひとりで作っています。</strong>問いはひとつだけ：本のように開く端末で、読書はどんな手触りであるべきか。</p>
+      <p style="margin-top:12px">DuoFolio は折り目を中心に書かれていて、折り目の上で動くだけのアプリではありません。他の選択肢と比べているなら、次のページに正直な比較があります——無料のほうが良い場合も含めて。</p>
     </div>
   </section>
 
@@ -102,20 +148,20 @@
     <h2 class="serif">続けて読む</h2>
     <div class="cards">
       <a class="card" href="reading-apps.html">
-        <h3>iPhone Duo のリーダー比較：DuoFolio / CalibReader / Apple Books</h3>
-        <p>それぞれが折りたたみに対して実際に何をしているのか、価格・評価・取り込み方法の違い、そして無料のものを選ぶべき場面。</p>
+        <h3>iPhone Duo のリーダーを、正直に比較</h3>
+        <p>DuoFolio、CalibReader、Caleb Reader、Apple Books——それぞれが折り目をどう扱うか、そして無料のほうが良いのはどんな時か。</p>
         <span class="more">比較を読む →</span>
       </a>
       <a class="card" href="how-to-read-epub.html">
-        <h3>iPhone で自前の EPUB を読む方法</h3>
-        <p>パソコン上のファイルから端末の見開き表示まで。ほとんどの解説が飛ばしている DRM の話も含めて。</p>
+        <h3>iPhone で自分の EPUB を読む</h3>
+        <p>パソコンの中のファイルから、Duo の見開きになるまで。ほとんどの解説が飛ばしている DRM の注意も。</p>
         <span class="more">ガイドを読む →</span>
       </a>
     </div>
   </section>
 
   <div class="cta">
-    <div class="serif">アプリではなく、本を開こう。</div>
+    <div class="serif">アプリではなく、本を開く。</div>
     <br><br>
     <a class="btn" href="https://apps.apple.com/app/id6823855712">DuoFolio をダウンロード</a>
   </div>
@@ -128,10 +174,31 @@
       <a href="../">English</a>
       <a href="../zh/">中文</a>
     </div>
-    <p>DuoFolio はデータを収集しません。サポート：<a href="mailto:phinn@kinet.app">phinn@kinet.app</a></p>
+    <p>DuoFolio はデータを集めません。サポート：<a href="mailto:phinn@kinet.app">phinn@kinet.app</a></p>
     <p style="margin-top:8px">© 2026 Kinet. iPhone Duo は Apple Inc. の商標です。DuoFolio は Apple と提携していません。</p>
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var fig = document.getElementById('film');
+  if (!fig) return;
+  var v = fig.querySelector('video');
+  var btn = fig.querySelector('.film-play');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function toggle() { v.paused ? v.play().catch(function () {}) : v.pause(); }
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { v.play().catch(function () {}); io.disconnect(); } });
+    }, { threshold: 0.4 });
+    io.observe(fig);
+  }
+  btn.addEventListener('click', toggle);
+  v.addEventListener('click', toggle);
+  v.addEventListener('play', function () { fig.classList.add('playing'); });
+  v.addEventListener('pause', function () { fig.classList.remove('playing'); });
+})();
+</script>
 </body>
 </html>

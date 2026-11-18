@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DuoFolio — Two-page EPUB reader built for iPhone Duo</title>
-<meta name="description" content="DuoFolio is an EPUB and PDF reader built natively for iPhone Duo's fold: a true two-page spread, a cover-display bookmark, and reading that never leaves your device. English, 简体中文, 繁體中文, 日本語.">
+<title>DuoFolio — Two-page EPUB reader built for iPhone Duo and iPad</title>
+<meta name="description" content="DuoFolio is an EPUB and PDF reader built for the iPhone Duo fold: a true two-page spread, page turns that curl like paper, a cover-display bookmark, and reading that never leaves your device. iPhone Duo, iPad, nine languages.">
 <link rel="canonical" href="https://phinn.github.io/DuoFolio/">
 <link rel="alternate" hreflang="en" href="https://phinn.github.io/DuoFolio/">
 <link rel="alternate" hreflang="zh-Hans" href="https://phinn.github.io/DuoFolio/zh/">
@@ -14,13 +14,13 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DuoFolio">
 <meta property="og:title" content="DuoFolio — A two-page reader for iPhone Duo">
-<meta property="og:description" content="Unfold for a real book spread. Fold shut and the cover display becomes your bookmark. Your EPUBs never leave the device.">
-<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/hero-spread.png">
+<meta property="og:description" content="Unfold for a real book spread. Lift the corner and the page curls like paper. Fold shut and the cover display becomes your bookmark.">
+<meta property="og:image" content="https://phinn.github.io/DuoFolio/screenshots/spread.jpg">
 <meta property="og:url" content="https://phinn.github.io/DuoFolio/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="DuoFolio — A two-page reader for iPhone Duo">
-<meta name="twitter:description" content="Unfold for a real book spread. Fold shut and the cover display becomes your bookmark.">
-<meta name="twitter:image" content="https://phinn.github.io/DuoFolio/screenshots/hero-spread.png">
+<meta name="twitter:description" content="Unfold for a real book spread. Lift the corner and the page curls like paper.">
+<meta name="twitter:image" content="https://phinn.github.io/DuoFolio/screenshots/spread.jpg">
 
 <link rel="stylesheet" href="assets/site.css">
 <script type="application/ld+json">
@@ -35,12 +35,22 @@
   "url": "https://phinn.github.io/DuoFolio/",
   "downloadUrl": "https://apps.apple.com/app/id6823855712",
   "installUrl": "https://apps.apple.com/app/id6823855712",
-  "description": "An EPUB and PDF reader designed for the iPhone Duo fold: a true two-page spread across the inner display, a cover-display bookmark card when folded shut, and fully on-device reading with no account and no tracking.",
-  "image": "https://phinn.github.io/DuoFolio/screenshots/hero-spread.png",
+  "description": "An EPUB and PDF reader designed for the iPhone Duo fold: a true two-page spread across the inner display, paper-curl page turns, a cover-display bookmark card when folded shut, and fully on-device reading with no account and no tracking.",
+  "image": "https://phinn.github.io/DuoFolio/screenshots/spread.jpg",
   "screenshot": [
-    "https://phinn.github.io/DuoFolio/screenshots/hero-spread.png",
-    "https://phinn.github.io/DuoFolio/screenshots/reading.png"
+    "https://phinn.github.io/DuoFolio/screenshots/spread.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/library.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/cover.jpg",
+    "https://phinn.github.io/DuoFolio/screenshots/ipad.jpg"
   ],
+  "video": {
+    "@type": "VideoObject",
+    "name": "DuoFolio — folded, unfolded, upright",
+    "description": "A twenty-second overview of DuoFolio on the iPhone Duo: one page one-handed when folded, a two-page spread when opened.",
+    "thumbnailUrl": "https://phinn.github.io/DuoFolio/media/en/film.jpg",
+    "contentUrl": "https://phinn.github.io/DuoFolio/media/en/film.mp4",
+    "uploadDate": "2026-11-18"
+  },
   "offers": {
     "@type": "Offer",
     "price": "6.99",
@@ -50,13 +60,15 @@
   },
   "featureList": [
     "True two-page spread reading",
+    "Paper-curl page turns that follow your finger",
     "Cover-display bookmark when folded",
+    "Native iPad layout",
     "Fully local EPUB library, no account, no upload",
     "Refined serif typography with paper-tone themes",
     "Column-accurate position memory across fold states",
-    "English, Simplified Chinese, Traditional Chinese, Japanese"
+    "Nine languages including English, Chinese, Japanese, Korean, German, French, Spanish and Portuguese"
   ],
-  "inLanguage": ["en", "zh-Hans", "zh-Hant", "ja"],
+  "inLanguage": ["en", "zh-Hans", "zh-Hant", "ja", "ko", "de", "fr", "es", "pt-BR"],
   "author": { "@type": "Organization", "name": "Kinet", "url": "https://phinn.github.io/" },
   "publisher": { "@type": "Organization", "name": "Kinet" }
 }
@@ -76,10 +88,10 @@
     },
     {
       "@type": "Question",
-      "name": "Does DuoFolio work on a normal iPhone?",
+      "name": "Does DuoFolio work on a normal iPhone or an iPad?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "It runs, but it is designed around the fold. The two-page spread and the cover-display bookmark only make sense on a device that opens like a book, so a foldable is where it is meant to be used."
+        "text": "It installs and reads on any iPhone or iPad running iOS 26. The two-page spread and the cover-display bookmark are designed around a device that folds like a book, so an iPhone Duo is where it is meant to be used, and the iPad gets its own tuned layout."
       }
     },
     {
@@ -87,7 +99,7 @@
       "name": "What file formats does DuoFolio read?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "EPUB is the primary format. PDF is also supported. Books are imported from Files or any share sheet, and they stay in the app's own library on the device."
+        "text": "EPUB is the primary format. PDF is also supported, with the same page-curl turning. Books are imported from Files or any share sheet, and they stay in the app's own library on the device."
       }
     },
     {
@@ -121,39 +133,64 @@
     <h1 class="serif">DuoFolio</h1>
     <div class="tag">A two-page reader built for the iPhone Duo fold</div>
     <p class="lead">The book flows across both halves of the inner display as one continuous spread — unfold for a real two-page layout, fold shut and the cover display becomes your bookmark. Your library never leaves the device.</p>
-    <img src="screenshots/hero-spread.png" alt="DuoFolio on iPhone Duo showing a book opened into a true two-page spread with a paper gutter">
-    <br>
     <a class="btn" href="https://apps.apple.com/app/id6823855712">Get DuoFolio — $6.99</a>
-    <div class="btn-note">One-time purchase · No subscription · No account · Four languages</div>
+    <div class="btn-note">One-time purchase · No subscription · No account · Nine languages · iPhone Duo &amp; iPad</div>
   </div>
+
+</div>
+
+<div class="wrap-wide">
+  <figure class="film" id="film">
+    <video poster="media/en/film.jpg" muted loop playsinline preload="none" aria-label="Twenty-second DuoFolio overview film">
+      <source src="media/en/film.mp4" type="video/mp4">
+    </video>
+    <button class="film-play" type="button" aria-label="Play the film"><span class="tri"></span></button>
+    <figcaption>Twenty seconds · no sound · recorded on an iPhone Duo</figcaption>
+  </figure>
+</div>
+
+<div class="wrap">
 
   <section>
     <h2 class="serif"><span class="num">01</span>A real spread, not a stretched page</h2>
-    <div class="feature">
-      <div class="txt">
-        <p class="lead-p">Hold the Duo open and a book opens with it.</p>
-        <p>Even pages on the left, odd pages on the right, with a soft paper gutter running down the hinge. DuoFolio turns whole leaves — it does not simply pour one column of text across a wider screen and call it a spread.</p>
-      </div>
-      <img src="screenshots/reading.png" alt="DuoFolio reading view on the iPhone Duo inner display">
-    </div>
+    <p class="lead-p">Hold the Duo open and a book opens with it.</p>
+    <p>Even pages on the left, odd pages on the right, with a soft paper gutter running down the hinge. DuoFolio turns whole leaves — it does not pour one column of text across a wider screen and call it a spread.</p>
+    <img class="shot" src="screenshots/spread.jpg" alt="DuoFolio on iPhone Duo showing a book opened into a true two-page spread with a paper gutter">
+  </section>
+
+  <section id="curl">
+    <h2 class="serif"><span class="num">02</span>The page turns like paper</h2>
+    <p class="lead-p">Catch the corner, and the leaf lifts with your finger.</p>
+    <p>DuoFolio does not slide or fade between pages. The leaf curls — the corner rolls up, the back of the page catches the light, its shadow falls across the gutter — and the next leaf is already underneath, waiting. Drag it part way and it hangs there; let go and it settles.</p>
+    <p>It is the one thing a foldable can do that a flat phone cannot: a page that behaves like a page, on a device that opens like a book.</p>
+
+    <figure class="still">
+      <img src="screenshots/spread-2.jpg" alt="A two-page spread in DuoFolio, one leaf per screen half, with the paper gutter down the hinge">
+      <figcaption>Every turn moves a whole leaf — no slide, no cross-fade, no column reflow.</figcaption>
+    </figure>
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">02</span>Closing the phone becomes a bookmark</h2>
+    <h2 class="serif"><span class="num">03</span>Closing the phone becomes a bookmark</h2>
     <p>Fold the Duo shut and the outer display turns into a cover card — cover art, title, and how far you have read, all glanceable without opening the phone. Flip it open and reading resumes on the exact column you left, whether the phone is folded, half-open, or fully unfolded.</p>
+    <img class="shot shot-cover" src="screenshots/cover.jpg" alt="DuoFolio cover card on the outer display of a folded iPhone Duo, showing cover art, title and a tap-to-continue button">
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">03</span>Your library stays on the device</h2>
+    <h2 class="serif"><span class="num">04</span>Your library stays on the device</h2>
     <p>Imported EPUBs are never uploaded. There is no account to create, no analytics to opt out of, and no network dependency. Reading position, theme and type size live on the device only.</p>
     <div class="callout">
       <p><strong>Why this matters for a reader:</strong> a reading app sees everything you read. DuoFolio is built so there is nothing to collect in the first place, rather than a promise to handle your data carefully.</p>
     </div>
+    <img class="shot shot-narrow" src="screenshots/library.jpg" alt="DuoFolio library grid with imported books">
   </section>
 
   <section>
-    <h2 class="serif"><span class="num">04</span>Typography for long sessions</h2>
-    <p>Serif body faces, tuned line spacing, and paper-tone themes built for hours rather than minutes. Four interface and book languages: English, Simplified Chinese, Traditional Chinese, and Japanese.</p>
+    <h2 class="serif"><span class="num">05</span>Typography for long sessions</h2>
+    <p>Serif body faces, tuned line spacing, and paper-tone themes built for hours rather than minutes. On a larger screen the measure widens rather than stretching — the same layout rules hold on an iPad as on the Duo.</p>
+    <img class="shot" src="screenshots/ipad.jpg" alt="DuoFolio reading view on an iPad with a centered serif text column">
+    <h3>Nine languages</h3>
+    <p>English, 简体中文, 繁體中文, 日本語, 한국어, Deutsch, Français, Español and Português (Brasil) — the interface and the App Store listing, not just the menu.</p>
   </section>
 
   <section>
@@ -198,5 +235,31 @@
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var fig = document.getElementById('film');
+  if (!fig) return;
+  var v = fig.querySelector('video');
+  var btn = fig.querySelector('.film-play');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function toggle() {
+    if (v.paused) { v.play().catch(function () {}); } else { v.pause(); }
+  }
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) { v.play().catch(function () {}); io.disconnect(); }
+      });
+    }, { threshold: 0.4 });
+    io.observe(fig);
+  }
+  btn.addEventListener('click', toggle);
+  v.addEventListener('click', toggle);
+  v.addEventListener('play', function () { fig.classList.add('playing'); });
+  v.addEventListener('pause', function () { fig.classList.remove('playing'); });
+})();
+</script>
 </body>
 </html>
